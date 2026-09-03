@@ -1,0 +1,458 @@
+/* Tai Chi Week Planner - styles.css */
+
+:root {
+  --bg: #f5f0e8;
+  --card-bg: #ffffff;
+  --primary: #2d5016;
+  --primary-light: #4a7c28;
+  --accent: #c4a35a;
+  --accent-light: #e8d5a0;
+  --text: #2c2c2c;
+  --text-light: #666;
+  --border: #d9d0c0;
+  --success: #4caf50;
+  --danger: #e74c3c;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  padding: 24px 20px;
+  text-align: center;
+  border-radius: 0 0 24px 24px;
+}
+
+.app-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+/* Tab navigation */
+.tab-nav {
+  display: flex;
+  background: var(--card-bg);
+  margin: 12px 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 4px;
+  border: none;
+  background: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  color: white;
+  border-radius: 8px;
+  margin: 4px;
+}
+
+.tab-content { display: none; padding: 0 16px; }
+.tab-content.active { display: block; }
+
+/* Week grid */
+.week-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.day-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border: 2px solid transparent;
+}
+
+.day-card:active { transform: scale(0.97); }
+.day-card.completed { border-color: var(--success); background: #f0faf0; }
+.day-card.today { border-color: var(--accent); }
+
+.day-card .day-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--primary);
+}
+
+.day-card .day-focus {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.day-card .day-check {
+  font-size: 1.4rem;
+  margin-top: 6px;
+}
+
+.day-card.completed .day-check::after { content: "✅"; }
+.day-card:not(.completed) .day-check::after { content: "⬜"; }
+
+/* Exercise selector */
+.exercise-selector {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 4px 0 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.exercise-chip {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--card-bg);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.exercise-chip.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Demo area */
+.demo-area {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  min-height: 320px;
+}
+
+.placeholder-text {
+  text-align: center;
+  color: var(--text-light);
+  margin-top: 60px;
+  font-size: 0.9rem;
+}
+
+.demo-exercise-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.demo-exercise-benefit {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+/* Animated step display */
+.step-display {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.step-animation {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+.step-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  min-height: 48px;
+  line-height: 1.5;
+}
+
+.step-counter {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  margin-top: 8px;
+}
+
+/* Progress bar */
+.progress-bar-wrap {
+  background: var(--border);
+  border-radius: 6px;
+  height: 6px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 6px;
+  transition: width 0.4s ease;
+}
+
+/* Demo controls */
+.demo-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.demo-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.demo-btn.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.demo-btn.secondary {
+  background: var(--accent-light);
+  color: var(--text);
+}
+
+.demo-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Step list (all steps view) */
+.step-list {
+  margin-top: 16px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.step-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.step-list-item:last-child { border-bottom: none; }
+
+.step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-list-text {
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+/* Progress tab */
+.progress-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 14px 8px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.stat-num {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.progress-calendar {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.calendar-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.cal-day {
+  text-align: center;
+  font-size: 0.65rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.cal-cell {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: #f5f5f5;
+}
+
+.cal-cell.done {
+  background: var(--success);
+  color: white;
+}
+
+.cal-cell.today {
+  border: 2px solid var(--accent);
+}
+
+.btn-danger {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid var(--danger);
+  background: none;
+  color: var(--danger);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Settings */
+.settings-group {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+.settings-group h3 {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 0.85rem;
+  gap: 10px;
+}
+
+.setting-row input[type="time"] {
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.setting-row input[type="range"] {
+  flex: 1;
+  max-width: 120px;
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.status-text {
+  font-size: 0.75rem;
+  color: var(--success);
+  margin-top: 8px;
+  text-align: center;
+}
+
+.hint {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (min-width: 481px) {
+  #app { padding-top: 20px; }
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#2d5016" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Tai Chi Week Planner</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="app-header">
+      <h1>☯ Tai Chi Week</h1>
+      <p class="subtitle">Yang Style · 7-Day Journey</p>
+    </header>
+
+    <!-- Navigation tabs -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="plan">📅 Plan</button>
+      <button class="tab-btn" data-tab="exercise">🏋️ Demo</button>
+      <button class="tab-btn" data-tab="progress">📊 Progress</button>
+      <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
+    </nav>
+
+    <!-- TAB: Plan -->
+    <section id="tab-plan" class="tab-content active">
+      <div id="week-grid" class="week-grid"></div>
+    </section>
+
+    <!-- TAB: Exercise Demo -->
+    <section id="tab-exercise" class="tab-content">
+      <div id="exercise-panel">
+        <div id="exercise-selector" class="exercise-selector"></div>
+        <div id="demo-area" class="demo-area">
+          <p class="placeholder-text">Select an exercise above to begin the demonstration.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: Progress -->
+    <section id="tab-progress" class="tab-content">
+      <div class="progress-stats">
+        <div class="stat-card">
+          <span class="stat-num" id="stat-days">0</span>
+          <span class="stat-label">Days Completed</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="stat-streak">0</span>
+          <span class="stat-label">Day Streak</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="stat-exercises">0</span>
+          <span class="stat-label">Exercises Done</span>
+        </div>
+      </div>
+      <div id="progress-calendar" class="progress-calendar"></div>
+      <button id="reset-progress" class="btn-danger">Reset All Progress</button>
+    </section>
+
+    <!-- TAB: Settings -->
+    <section id="tab-settings" class="tab-content">
+      <div class="settings-group">
+        <h3>⏰ Daily Reminder</h3>
+        <label class="setting-row">
+          <span>Enable reminder</span>
+          <input type="checkbox" id="reminder-toggle" />
+        </label>
+        <label class="setting-row">
+          <span>Reminder time</span>
+          <input type="time" id="reminder-time" value="08:00" />
+        </label>
+        <button id="save-reminder" class="btn-primary">Save Reminder</button>
+        <p id="reminder-status" class="status-text"></p>
+      </div>
+      <div class="settings-group">
+        <h3>🎯 Preference</h3>
+        <label class="setting-row">
+          <span>Seconds per step</span>
+          <input type="range" id="step-duration" min="2" max="10" value="4" />
+          <span id="step-duration-val">4s</span>
+        </label>
+      </div>
+      <div class="settings-group">
+        <h3>📲 Install App</h3>
+        <p class="hint">Add to your home screen for the full app experience.</p>
+        <button id="install-btn" class="btn-primary" style="display:none">Install PWA</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
