@@ -707,6 +707,13 @@ function initReset() {
 
 function init() {
   loadState();
+
+  // Auto-select first exercise so Demo tab has content on load
+  if (!state.selectedExercise) {
+    state.selectedExercise = Object.keys(EXERCISES)[0];
+    state.currentStep = 0;
+  }
+
   renderWeekGrid();
   renderExerciseSelector();
   renderDemoArea();
