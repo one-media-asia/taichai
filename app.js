@@ -2,6 +2,20 @@
 
 // ==================== DATA (English source of truth; day keys stay English) ====================
 
+javascript
+// ==================== PAYWALL GATE ====================
+(function() {
+  var cookies = document.cookie.split(';').reduce(function(acc, c) {
+    var parts = c.trim().split('=');
+    if (parts.length === 2) acc[parts[0]] = parts[1];
+    return acc;
+  }, {});
+  if (cookies.taichi_access !== 'granted') {
+    window.location.href = 'gate.html';
+  }
+})();
+
+
 const WEEK_PLAN = [
   {
     day: "Monday",

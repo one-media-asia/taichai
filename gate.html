@@ -1,0 +1,96 @@
+
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#2d5016" />
+  <title>Tai Chi Week — Access</title>
+  <style>
+    :root {
+      --bg: #f5f0e8;
+      --card-bg: #ffffff;
+      --primary: #2d5016;
+      --primary-light: #4a7c28;
+      --accent: #c4a35a;
+      --accent-light: #e8d5a0;
+      --text: #2c2c2c;
+      --text-light: #666;
+      --border: #d9d0c0;
+      --success: #4caf50;
+      --danger: #e74c3c;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .gate-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 40px 28px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .gate-icon {
+      font-size: 3.5rem;
+      margin-bottom: 16px;
+    }
+    .gate-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .gate-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+    .pay-btn {
+      display: inline-block;
+      background: #635bff;
+      color: #fff;
+      padding: 16px 40px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    .pay-btn:hover { background: #5147e5; transform: translateY(-1px); }
+    .pay-btn:active { transform: scale(0.98); }
+    .gate-note {
+      margin-top: 16px;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+    .gate-note a { color: var(--primary-light); }
+  </style>
+</head>
+<body>
+  <div class="gate-card">
+    <div class="gate-icon">☯</div>
+    <h1 class="gate-title">Tai Chi Week</h1>
+    <p class="gate-subtitle">One-time payment unlocks the full 7-day Yang Style journey — lifetime access.</p>
+    <a class="pay-btn" href="https://buy.stripe.com/fZucN57du4Se30o51Z7EQ02">Pay Now to Access</a>
+    <p class="gate-note">Secure payment via Stripe. You'll be redirected back after payment.<br>Already paid? <a href="payment-success.html">Click here</a></p>
+  </div>
+</body>
+</html>
+
