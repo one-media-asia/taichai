@@ -2,7 +2,6 @@
 
 // ==================== DATA (English source of truth; day keys stay English) ====================
 
-javascript
 // ==================== ACCESS GATE ====================
 // Check localStorage first (durable lifetime grant), then cookie (redirect handoff).
 // Lifetimes: localStorage flag is permanent; cookie is a session cookie set by
