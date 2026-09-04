@@ -89,9 +89,13 @@ html
     <p class="countdown" id="countdown">Redirecting in 5s...</p>
   </div>
 
+ 
+html
   <script>
-    // Set the access cookie (30 days)
-    document.cookie = 'taichi_access=granted; path=/; max-age=' + (30 * 24 * 60 * 60) + '; SameSite=Lax';
+    // Grant lifetime access: a session cookie (for the Stripe redirect handoff)
+    // plus a permanent localStorage flag so the user never loses access.
+    document.cookie = 'taichi_access=granted; path=/; SameSite=Lax';
+    try { localStorage.setItem('taiChi_access_granted', '1'); } catch (e) { /* ignore */ }
 
     var countdown = 5;
     var countdownEl = document.getElementById('countdown');
