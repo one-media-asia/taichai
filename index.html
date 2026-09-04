@@ -14,16 +14,24 @@
   <div id="app">
     <!-- Header -->
     <header class="app-header">
-      <h1>☯ Tai Chi Week</h1>
-      <p class="subtitle">Yang Style · 7-Day Journey</p>
+      <div class="header-top">
+        <div class="header-titles">
+          <h1 data-i18n="title">☯ Tai Chi Week</h1>
+          <p class="subtitle" data-i18n="subtitle">Yang Style · 7-Day Journey</p>
+        </div>
+        <div class="lang-toggle" id="lang-toggle-header" role="group" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="zh-CN">中文</button>
+        </div>
+      </div>
     </header>
 
     <!-- Navigation tabs -->
     <nav class="tab-nav">
-      <button class="tab-btn active" data-tab="plan">📅 Plan</button>
-      <button class="tab-btn" data-tab="exercise">🏋️ Demo</button>
-      <button class="tab-btn" data-tab="progress">📊 Progress</button>
-      <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
+      <button class="tab-btn active" data-tab="plan" data-i18n="tabPlan">📅 Plan</button>
+      <button class="tab-btn" data-tab="exercise" data-i18n="tabDemo">🏋️ Demo</button>
+      <button class="tab-btn" data-tab="progress" data-i18n="tabProgress">📊 Progress</button>
+      <button class="tab-btn" data-tab="settings" data-i18n="tabSettings">⚙️ Settings</button>
     </nav>
 
     <!-- TAB: Plan -->
@@ -36,7 +44,7 @@
       <div id="exercise-panel">
         <div id="exercise-selector" class="exercise-selector"></div>
         <div id="demo-area" class="demo-area">
-          <p class="placeholder-text">Select an exercise above to begin the demonstration.</p>
+          <p class="placeholder-text" data-i18n="placeholder">Select an exercise above to begin the demonstration.</p>
         </div>
       </div>
     </section>
@@ -46,48 +54,55 @@
       <div class="progress-stats">
         <div class="stat-card">
           <span class="stat-num" id="stat-days">0</span>
-          <span class="stat-label">Days Completed</span>
+          <span class="stat-label" data-i18n="daysCompleted">Days Completed</span>
         </div>
         <div class="stat-card">
           <span class="stat-num" id="stat-streak">0</span>
-          <span class="stat-label">Day Streak</span>
+          <span class="stat-label" data-i18n="dayStreak">Day Streak</span>
         </div>
         <div class="stat-card">
           <span class="stat-num" id="stat-exercises">0</span>
-          <span class="stat-label">Exercises Done</span>
+          <span class="stat-label" data-i18n="exercisesDone">Exercises Done</span>
         </div>
       </div>
       <div id="progress-calendar" class="progress-calendar"></div>
-      <button id="reset-progress" class="btn-danger">Reset All Progress</button>
+      <button id="reset-progress" class="btn-danger" data-i18n="resetProgress">Reset All Progress</button>
     </section>
 
     <!-- TAB: Settings -->
     <section id="tab-settings" class="tab-content">
       <div class="settings-group">
-        <h3>⏰ Daily Reminder</h3>
+        <h3 data-i18n="language">🌐 Language</h3>
+        <div class="lang-toggle lang-toggle-settings" id="lang-toggle-settings" role="group" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="zh-CN">中文</button>
+        </div>
+      </div>
+      <div class="settings-group">
+        <h3 data-i18n="dailyReminder">⏰ Daily Reminder</h3>
         <label class="setting-row">
-          <span>Enable reminder</span>
+          <span data-i18n="enableReminder">Enable reminder</span>
           <input type="checkbox" id="reminder-toggle" />
         </label>
         <label class="setting-row">
-          <span>Reminder time</span>
+          <span data-i18n="reminderTime">Reminder time</span>
           <input type="time" id="reminder-time" value="08:00" />
         </label>
-        <button id="save-reminder" class="btn-primary">Save Reminder</button>
+        <button id="save-reminder" class="btn-primary" data-i18n="saveReminder">Save Reminder</button>
         <p id="reminder-status" class="status-text"></p>
       </div>
       <div class="settings-group">
-        <h3>🎯 Preference</h3>
+        <h3 data-i18n="preference">🎯 Preference</h3>
         <label class="setting-row">
-          <span>Seconds per step</span>
+          <span data-i18n="secondsPerStep">Seconds per step</span>
           <input type="range" id="step-duration" min="2" max="10" value="4" />
           <span id="step-duration-val">4s</span>
         </label>
       </div>
       <div class="settings-group">
-        <h3>📲 Install App</h3>
-        <p class="hint">Add to your home screen for the full app experience.</p>
-        <button id="install-btn" class="btn-primary" style="display:none">Install PWA</button>
+        <h3 data-i18n="installApp">📲 Install App</h3>
+        <p class="hint" data-i18n="installHint">Add to your home screen for the full app experience.</p>
+        <button id="install-btn" class="btn-primary" style="display:none" data-i18n="installPwa">Install PWA</button>
       </div>
     </section>
   </div>
