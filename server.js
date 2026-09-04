@@ -55,7 +55,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
       mode: 'payment',
       payment_method_types: ['card'],
       line_items: [{
-        price: 'price_1UC0DvHfLuEywLiXvKSqLnK2',
+        price: 'price_1UBpKQHfLuEywLiXgwgLD2xS',
         quantity: 1
       }],
       success_url: `${baseUrl}/payment-success.html?session_id={CHECKOUT_SESSION_ID}`,
