@@ -128,10 +128,29 @@ html
   </div>
 
   <script>
-    // Grant lifetime access: a session cookie (for the Stripe redirect handoff)
-    // plus a permanent localStorage flag so the user never loses access.
-    document.cookie = 'taichi_access=granted; path=/; SameSite=Lax';
-    try { localStorage.setItem('taiChi_access_granted', '1'); } catch (e) { /* ignore */ }
+    var urlParams = new URLSearchParams(window.location.search);
+    var sessionId = urlParams.get('session_id');
+
+    function grantLocalAccess() {
+      document.cookie = 'taichi_access=granted; path=/; SameSite=Lax';
+      try { localStorage.setItem('taiChi_access_granted', '1'); } catch (e) { /* ignore */ }
+    }
+
+    function finishPayment() {
+      grantLocalAccess();
+      if (sessionId) {
+        fetch('/api/mark-paid', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ sessionId: sessionId })
+        }).catch(function() {
+          // Ignore server-side verification failure when the environment is unavailable.
+        });
+      }
+    }
+
+    finishPayment();
 
     var countdown = 5;
     var countdownEl = document.getElementById('countdown');
@@ -150,7 +169,6 @@ html
       window.location.href = 'index.html';
     });
 
-    // PWA install option on the success page
     (function() {
       var installBtn = document.getElementById('installPwaBtn');
       if (!installBtn) return;

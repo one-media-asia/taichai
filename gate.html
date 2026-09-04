@@ -88,9 +88,66 @@ html
     <div class="gate-icon">☯</div>
     <h1 class="gate-title">Tai Chi Week</h1>
     <p class="gate-subtitle">One-time payment unlocks the full 7-day Yang Style journey — lifetime access.</p>
-    <a class="pay-btn" href="https://buy.stripe.com/fZucN57du4Se30o51Z7EQ02">Pay Now to Access</a>
-    <p class="gate-note">Secure payment via Stripe. You'll be redirected back after payment.<br>Already paid? <a href="https://taichi.onemedia.asia/payment-success.html">Click here</a></p>
+    <button class="pay-btn" id="payBtn" type="button">Pay Now to Access</button>
+    <p class="gate-note">Secure payment via Stripe. You'll be redirected back after payment.<br>Already paid? <a href="#" onclick="grantAccessAndGo(); return false;">Click here</a></p>
   </div>
+
+  <script>
+    const payBtn = document.getElementById('payBtn');
+
+    payBtn.addEventListener('click', async function() {
+      try {
+        const res = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin'
+        });
+        const data = await res.json();
+        if (data && data.url) {
+          window.location.href = data.url;
+          return;
+        }
+        throw new Error(data && data.error ? data.error : 'checkout failed');
+      } catch (e) {
+        alert('Unable to start checkout right now. Please try again.');
+      }
+    });
+
+    async function grantAccessAndGo() {
+      try {
+        const res = await fetch('/api/check-access', { credentials: 'same-origin' });
+        const data = await res.json();
+        if (data.authorized) {
+          window.location.href = 'index.html';
+          return;
+        }
+      } catch (e) { /* ignore */ }
+
+      var hasAccess = false;
+      try {
+        hasAccess = localStorage.getItem('taiChi_access_granted') === '1';
+      } catch (e) { /* ignore */ }
+
+      if (!hasAccess) {
+        var cookies = {};
+        document.cookie.split(';').forEach(function(c) {
+          var parts = c.trim().split('=');
+          if (parts.length === 2) cookies[parts[0]] = parts[1];
+        });
+        hasAccess = cookies.taichi_access === 'granted';
+      }
+
+      if (hasAccess) {
+        document.cookie = 'taichi_access=granted; path=/; SameSite=Lax';
+        try { localStorage.setItem('taiChi_access_granted', '1'); } catch (e) { /* ignore */ }
+        window.location.href = 'index.html';
+        return;
+      }
+
+      alert('No valid payment record was found. Please complete the checkout to unlock access.');
+      payBtn.click();
+    }
+  </script>
 </body>
 </html>
 
