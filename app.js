@@ -3,17 +3,22 @@
 // ==================== DATA (English source of truth; day keys stay English) ====================
 
 javascript
+// ==================== ACCESS GATE ====================
+// Check localStorage first (durable lifetime grant), then cookie (redirect handoff).
+// Lifetimes: localStorage flag is permanent; cookie is a session cookie set by
+// payment-success.html to carry the grant through the Stripe redirect.
 try {
   var _cookies = document.cookie.split(';').reduce(function(acc, c) {
     var parts = c.trim().split('=');
     if (parts.length === 2) acc[parts[0]] = parts[1];
     return acc;
   }, {});
-  if (_cookies.taichi_access !== 'granted') {
+  var _lsAccess = false;
+  try { _lsAccess = localStorage.getItem('taiChi_access_granted') === '1'; } catch (e) { /* ignore */ }
+  if (_lsAccess !== true && _cookies.taichi_access !== 'granted') {
     window.location.replace('gate.html');
   }
 } catch(e) { /* ignore */ }
-
 
 const WEEK_PLAN = [
   {
