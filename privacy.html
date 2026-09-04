@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2d5016" />
+  <title>Privacy Policy · Tai Chi Week</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .legal {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 20px 16px 48px;
+      line-height: 1.55;
+      color: var(--text);
+    }
+    .legal h1 {
+      font-size: 1.45rem;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .legal .meta {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+    .legal h2 {
+      font-size: 1.05rem;
+      margin: 22px 0 8px;
+      color: var(--primary);
+    }
+    .legal p, .legal li {
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+    }
+    .legal ul {
+      padding-left: 1.2rem;
+      margin-bottom: 12px;
+    }
+    .legal a { color: var(--primary-light); }
+    .legal .back {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--primary);
+    }
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .lang-switch button {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .lang-switch button.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    [data-lang-panel] { display: none; }
+    [data-lang-panel].active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="legal">
+    <a class="back" href="./index.html">← Tai Chi Week</a>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" class="active" data-show="en">EN</button>
+      <button type="button" data-show="zh">中文</button>
+    </div>
+
+    <div data-lang-panel="en" class="active">
+      <h1>Privacy Policy</h1>
+      <p class="meta">Effective date: September 4, 2026<br />
+      Service: <a href="https://taichi.onemedia.asia">Tai Chi Week Planner</a> (taichi.onemedia.asia)<br />
+      Operator: One Media Asia (one-media-asia)</p>
+
+      <p>This Privacy Policy explains how the Tai Chi Week Planner progressive web app (“the App”) handles information. The App is a practice planner for Yang-style Tai Chi.</p>
+
+      <h2>1. Summary</h2>
+      <ul>
+        <li>We do <strong>not</strong> require an account to use the App today.</li>
+        <li>Practice progress, language choice, reminder settings, and install-banner preferences are stored <strong>on your device</strong> (browser local storage).</li>
+        <li>We do <strong>not</strong> currently use advertising trackers or analytics SDKs in the App.</li>
+        <li>If you enable reminders, your browser may ask permission to show local notifications on your device.</li>
+        <li>Hosting and delivery of the website files are provided by our hosting provider (currently Vercel).</li>
+      </ul>
+
+      <h2>2. Information stored on your device</h2>
+      <p>The App stores the following in your browser’s local storage (it stays on your device unless you clear site data):</p>
+      <ul>
+        <li><strong>Practice progress</strong> — completed days, completed exercises, last active date, and demo step-speed preference.</li>
+        <li><strong>Language</strong> — English or Simplified Chinese preference.</li>
+        <li><strong>Reminder settings</strong> — whether reminders are enabled and the reminder time you chose.</li>
+        <li><strong>Install banner</strong> — whether you dismissed the “install as app” prompt.</li>
+      </ul>
+      <p>Clearing your browser data for this site, or resetting progress in Settings, removes that information from the device.</p>
+
+      <h2>3. Notifications</h2>
+      <p>If you turn on daily reminders and grant notification permission, the App may schedule a local reminder on your device. Notification permission is optional. We do not use this to send marketing messages.</p>
+
+      <h2>4. Network and hosting</h2>
+      <p>When you open the App, your device requests the App’s files from our hosting provider. Like most websites, standard technical data (such as IP address, browser type, and request timestamps) may be processed by the host’s infrastructure and logs for security, reliability, and delivery. We do not use that to build a marketing profile in the App itself.</p>
+
+      <h2>5. Payments (planned)</h2>
+      <p>We plan to offer an optional one-time unlock (for example, before full use or install prompts). If and when payments are enabled, payment card details will be processed by a payment provider such as Stripe — not stored by the App on your device. That provider’s privacy policy will also apply to payment data. This section will be updated when checkout goes live.</p>
+
+      <h2>6. Children</h2>
+      <p>The App is a general wellness/exercise planner and is not directed at children under 13. If you believe a child has provided personal information through a future feature that collects it, contact us and we will delete it where applicable.</p>
+
+      <h2>7. Your choices</h2>
+      <ul>
+        <li>Change or clear language and reminder settings in the App.</li>
+        <li>Use <strong>Reset All Progress</strong> to clear practice history stored locally.</li>
+        <li>Revoke notification permission in your browser or system settings.</li>
+        <li>Uninstall the home-screen / PWA shortcut and clear site data to remove local App storage.</li>
+      </ul>
+
+      <h2>8. International visitors</h2>
+      <p>The App may be accessed from different countries. Hosting and related infrastructure may process technical data in the United States or other regions where the provider operates.</p>
+
+      <h2>9. Changes</h2>
+      <p>We may update this Privacy Policy as the App changes (for example, when payments launch). The effective date above will be revised when we do. Continued use after an update means you accept the revised policy.</p>
+
+      <h2>10. Contact</h2>
+      <p>Privacy questions about Tai Chi Week Planner: contact One Media Asia via <a href="https://onemedia.asia">onemedia.asia</a> or open an issue on the project repository if you have access. If you prefer a dedicated privacy email, tell the operator and this page will be updated.</p>
+    </div>
+
+    <div data-lang-panel="zh">
+      <h1>隐私政策</h1>
+      <p class="meta">生效日期：September 4, 2026<br />
+      服务：<a href="https://taichi.onemedia.asia">太极周计划</a>（taichi.onemedia.asia）<br />
+      运营方：One Media Asia（one-media-asia）</p>
+
+      <p>本隐私政策说明「太极周计划」渐进式网页应用（下称“本应用”）如何处理信息。本应用为杨氏太极练习计划工具。</p>
+
+      <h2>1. 摘要</h2>
+      <ul>
+        <li>目前使用本应用<strong>无需注册账号</strong>。</li>
+        <li>练习进度、语言、提醒设置与安装横幅偏好保存在<strong>您的设备本地</strong>（浏览器本地存储）。</li>
+        <li>本应用目前<strong>未</strong>接入广告跟踪或统计分析 SDK。</li>
+        <li>若开启提醒，浏览器可能会请求本地通知权限。</li>
+        <li>网站文件由托管服务商（当前为 Vercel）托管与分发。</li>
+      </ul>
+
+      <h2>2. 存储在您设备上的信息</h2>
+      <p>本应用可能在浏览器本地存储中保存：</p>
+      <ul>
+        <li><strong>练习进度</strong> — 已完成日期、已完成动作、最近活动日、演示每步时长等。</li>
+        <li><strong>语言</strong> — 英语或简体中文偏好。</li>
+        <li><strong>提醒设置</strong> — 是否开启提醒及提醒时间。</li>
+        <li><strong>安装横幅</strong> — 是否已关闭“安装为应用”提示。</li>
+      </ul>
+      <p>清除本站浏览器数据，或在设置中重置进度，将删除设备上的上述信息。</p>
+
+      <h2>3. 通知</h2>
+      <p>若您开启每日提醒并授予通知权限，本应用可能在设备上安排本地提醒。通知权限为可选项，我们不会据此发送营销信息。</p>
+
+      <h2>4. 网络与托管</h2>
+      <p>打开本应用时，设备会向托管服务商请求应用文件。与多数网站一样，托管方基础设施与日志可能处理 IP 地址、浏览器类型、请求时间等技术数据，用于安全、稳定与内容分发。本应用本身不会用这些数据建立营销画像。</p>
+
+      <h2>5. 付款（计划中）</h2>
+      <p>我们计划提供一次性解锁（例如在完整体验或安装提示前）。启用付款后，银行卡等支付信息将由支付服务商（如 Stripe）处理，不会由本应用保存在您的设备上，并同时适用该服务商的隐私政策。正式上线结账时，我们将更新本节。</p>
+
+      <h2>6. 儿童</h2>
+      <p>本应用为一般健康/运动计划工具，并非面向 13 岁以下儿童。若未来功能收集了儿童个人信息，请联系我们，我们将在适用范围内删除。</p>
+
+      <h2>7. 您的选择</h2>
+      <ul>
+        <li>在应用内更改语言与提醒设置。</li>
+        <li>使用<strong>重置全部进度</strong>清除本地练习记录。</li>
+        <li>在浏览器或系统设置中撤销通知权限。</li>
+        <li>删除主屏幕/PWA 快捷方式并清除网站数据以移除本地存储。</li>
+      </ul>
+
+      <h2>8. 跨境访问</h2>
+      <p>本应用可从不同国家/地区访问。托管及相关基础设施可能在美国或其他服务商运营地区处理技术数据。</p>
+
+      <h2>9. 变更</h2>
+      <p>我们可能随产品变更更新本政策（例如启用付款时）。更新时将修改上方生效日期。更新后继续使用即表示接受修订后的政策。</p>
+
+      <h2>10. 联系方式</h2>
+      <p>关于太极周计划的隐私问题：请通过 <a href="https://onemedia.asia">onemedia.asia</a> 联系 One Media Asia，或在您有权限的项目仓库中提交 issue。若您希望使用专用隐私邮箱，请告知运营方，我们将更新本页。</p>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll(".lang-switch button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const lang = btn.dataset.show;
+        document.querySelectorAll(".lang-switch button").forEach((b) => b.classList.toggle("active", b === btn));
+        document.querySelectorAll("[data-lang-panel]").forEach((panel) => {
+          panel.classList.toggle("active", panel.getAttribute("data-lang-panel") === lang);
+        });
+        document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      });
+    });
+  </script>
+</body>
+</html>
