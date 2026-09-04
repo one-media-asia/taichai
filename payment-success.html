@@ -6,9 +6,175 @@ html
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#2d5016" />
   <title>Tai Chi Week — Payment Successful</title>
+  <style><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#2d5016" />
+  <title>Tai Chi Week — Payment Successful</title>
   <style>
     :root {
       --bg: #f5f0e8;
+      --card-bg: #ffffff;
+      --primary: #2d5016;
+      --primary-light: #4a7c28;
+      --accent: #c4a35a;
+      --accent-light: #e8d5a0;
+      --text: #2c2c2c;
+      --text-light: #666;
+      --border: #d9d0c0;
+      --success: #4caf50;
+      --danger: #e74c3c;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .success-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 40px 28px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .success-icon {
+      font-size: 3.5rem;
+      margin-bottom: 16px;
+    }
+    .success-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .success-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+    .enter-btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 16px 40px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+    .enter-btn:hover { background: var(--primary-light); transform: translateY(-1px); }
+    .enter-btn:active { transform: scale(0.98); }
+    .install-option {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+    .install-option-btn {
+      display: inline-block;
+      margin-top: 8px;
+      background: transparent;
+      color: var(--primary);
+      padding: 10px 16px;
+      border: 1px solid var(--primary);
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .install-option-btn:hover { background: var(--primary); color: #fff; }
+    .install-option-ios {
+      margin-top: 6px;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+    .countdown {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+  <div class="success-card">
+    <div class="success-icon">✅</div>
+    <h1 class="success-title">Payment Successful!</h1>
+    <p class="success-subtitle">You now have lifetime access to Tai Chi Week.</p>
+    <button class="enter-btn" id="enterBtn">Enter the App</button>
+    <div class="install-option">
+      <button class="install-option-btn" id="installPwaBtn">📲 Install as App</button>
+      <p class="install-option-ios">iOS: tap Share → Add to Home Screen</p>
+    </div>
+    <p class="countdown" id="countdown">Redirecting in 5s...</p>
+  </div>
+
+  <script>
+    // Grant lifetime access: a session cookie (for the Stripe redirect handoff)
+    // plus a permanent localStorage flag so the user never loses access.
+    document.cookie = 'taichi_access=granted; path=/; SameSite=Lax';
+    try { localStorage.setItem('taiChi_access_granted', '1'); } catch (e) { /* ignore */ }
+
+    var countdown = 5;
+    var countdownEl = document.getElementById('countdown');
+    var enterBtn = document.getElementById('enterBtn');
+
+    function updateCountdown() {
+      countdown--;
+      if (countdown <= 0) {
+        window.location.href = 'index.html';
+      } else {
+        countdownEl.textContent = 'Redirecting in ' + countdown + 's...';
+      }
+    }
+
+    enterBtn.addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+
+    // PWA install option on the success page
+    (function() {
+      var installBtn = document.getElementById('installPwaBtn');
+      if (!installBtn) return;
+      installBtn.addEventListener('click', function() {
+        var ua = navigator.userAgent || '';
+        var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        if (isIOS) {
+          alert('Tap the Share button (📤) in your browser, then choose "Add to Home Screen".');
+          return;
+        }
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+          alert('This app is already installed!');
+          return;
+        }
+        try { window.localStorage.setItem('taiChiInstallPromptFromSuccess', '1'); } catch (e) { /* ignore */ }
+        window.location.href = 'index.html';
+      });
+    })();
+
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
+    :root {
       --card-bg: #ffffff;
       --primary: #2d5016;
       --primary-light: #4a7c28;
