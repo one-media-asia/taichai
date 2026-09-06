@@ -1193,6 +1193,7 @@ function stopAppDemoTour() {
     clearInterval(state.demoTourTimer);
     state.demoTourTimer = null;
   }
+  stopDemo();
 }
 
 function startAppDemoTour() {
@@ -1200,28 +1201,33 @@ function startAppDemoTour() {
   const demoTabs = ["plan", "exercise", "progress", "settings"];
 
   stopAppDemoTour();
-  stopDemo();
 
+  let tourStep = 0;
   state.demoTourIndex = 0;
 
-  state.demoTourTimer = setInterval(() => {
-    const tab = demoTabs[state.demoTourIndex % demoTabs.length];
+  const runTourStep = () => {
+    const tab = demoTabs[tourStep % demoTabs.length];
+
     if (tab === "exercise") {
-      const exerciseId = exerciseIds[Math.floor(state.demoTourIndex / demoTabs.length) % exerciseIds.length];
+      const exerciseId = exerciseIds[Math.floor(tourStep / demoTabs.length) % exerciseIds.length];
       state.selectedExercise = exerciseId;
       state.currentStep = 0;
       renderExerciseSelector();
       renderDemoArea();
-      startDemo();
+      switchTab("exercise");
+      stopDemo();
     } else {
+      state.selectedExercise = null;
+      stopDemo();
       switchTab(tab);
     }
 
-    state.demoTourIndex += 1;
-  }, 5000);
+    tourStep += 1;
+    state.demoTourIndex = tourStep;
+  };
 
-  const initialTab = demoTabs[0];
-  switchTab(initialTab);
+  runTourStep();
+  state.demoTourTimer = setInterval(runTourStep, 5000);
 }
 
 // ==================== REMINDERS ====================
