@@ -863,6 +863,17 @@ function renderExerciseSelector() {
   });
 }
 
+function startFirstWorkout() {
+  const firstExercise = Object.keys(EXERCISES)[0];
+  if (!firstExercise) return;
+  state.selectedExercise = firstExercise;
+  state.currentStep = 0;
+  renderExerciseSelector();
+  renderDemoArea();
+  switchTab("exercise");
+  startDemo();
+}
+
 function selectExercise(exId) {
   state.selectedExercise = exId;
   state.currentStep = 0;
@@ -1503,6 +1514,7 @@ function init() {
   renderWeekGrid();
   renderExerciseSelector();
   renderDemoArea();
+  document.getElementById("start-first-workout").addEventListener("click", startFirstWorkout);
   renderProgress();
   initReminders();
   initPWA();

@@ -29,7 +29,7 @@
     <!-- Navigation tabs -->
     <nav class="tab-nav">
       <button class="tab-btn active" data-tab="plan" data-i18n="tabPlan">📅 Plan</button>
-      <button class="tab-btn" data-tab="exercise" data-i18n="tabDemo">🏋️ Demo</button>
+      <button class="tab-btn" data-tab="exercise" data-i18n="tabDemo">🏋️ Workout</button>
       <button class="tab-btn" data-tab="progress" data-i18n="tabProgress">📊 Progress</button>
       <button class="tab-btn" data-tab="settings" data-i18n="tabSettings">⚙️ Settings</button>
     </nav>
@@ -42,6 +42,14 @@
     <!-- TAB: Exercise Demo -->
     <section id="tab-exercise" class="tab-content">
       <div id="exercise-panel">
+        <div class="workout-intro">
+          <div>
+            <span class="workout-kicker">Daily practice</span>
+            <h2>Move with intention</h2>
+            <p>Choose a movement, follow each position, and build a calm daily rhythm.</p>
+          </div>
+          <button class="btn-primary" id="start-first-workout" type="button">Start first workout</button>
+        </div>
         <div id="exercise-selector" class="exercise-selector"></div>
         <div id="demo-area" class="demo-area">
           <p class="placeholder-text" data-i18n="placeholder">Select an exercise above to begin the demonstration.</p>
