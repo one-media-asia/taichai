@@ -1384,11 +1384,6 @@ function switchTab(tabName) {
   if (tabName !== "exercise") {
     stopDemo();
   }
-  if (allowDemoPreview && tabName === "settings") {
-    window.location.href = "buy-now.html";
-    return;
-  }
-
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.tab === tabName);
   });
@@ -1437,6 +1432,15 @@ function startAppDemoTour() {
       state.selectedExercise = null;
       stopDemo();
       switchTab("progress");
+    },
+    () => {
+      state.selectedExercise = null;
+      stopDemo();
+      switchTab("settings");
+    },
+    () => {
+      stopAppDemoTour();
+      window.location.href = "features.html";
     },
     () => {
       stopAppDemoTour();

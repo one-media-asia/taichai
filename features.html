@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2d5016" />
+  <title>Tai Chi Week Features</title>
+  <style>
+    :root { --bg: #f5f0e8; --card: #fff; --primary: #2d5016; --accent: #c4a35a; --text: #2c2c2c; --muted: #666; --border: #d9d0c0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; padding: 24px 16px; background: linear-gradient(180deg, #f6f1e8, #efeadb); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    main { width: min(760px, 100%); margin: 0 auto; }
+    header { margin-bottom: 20px; }
+    .kicker { color: var(--primary); font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    h1 { margin: 6px 0; color: var(--primary); font-size: clamp(1.8rem, 5vw, 2.6rem); }
+    header p { margin: 0; color: var(--muted); line-height: 1.5; }
+    .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .feature { padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--card); }
+    .feature-icon { font-size: 1.5rem; }
+    .feature h2 { margin: 8px 0 5px; color: var(--primary); font-size: 1rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: .82rem; line-height: 1.45; }
+    .exercise-list { margin-top: 10px; padding: 18px; border-left: 3px solid var(--accent); background: rgba(255,255,255,.7); }
+    .exercise-list h2 { margin: 0 0 9px; color: var(--primary); font-size: 1.05rem; }
+    .exercise-list ol { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 24px; margin: 0; padding-left: 20px; font-size: .82rem; line-height: 1.4; }
+    .actions { display: flex; gap: 10px; margin-top: 20px; }
+    .actions a { flex: 1; padding: 14px 16px; border-radius: 10px; text-align: center; text-decoration: none; font-weight: 700; }
+    .primary { background: var(--primary); color: #fff; }
+    .secondary { border: 1px solid var(--border); background: var(--card); color: var(--primary); }
+    @media (max-width: 540px) { .feature-grid, .exercise-list ol { grid-template-columns: 1fr; } .actions { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="kicker">Tai Chi Week</span>
+      <h1>Everything included in your practice</h1>
+      <p>A focused seven-day system designed to help you move consistently, learn safely, and build a routine that fits your life.</p>
+    </header>
+    <section class="feature-grid" aria-label="App features">
+      <article class="feature"><div class="feature-icon">🎯</div><h2>Personal goal recommendations</h2><p>Choose balance, mobility, calm, or strength and receive a recommended starting workout.</p></article>
+      <article class="feature"><div class="feature-icon">📅</div><h2>Seven-day practice plan</h2><p>Follow a clear weekly structure from foundation and breathing to full-form practice and rest.</p></article>
+      <article class="feature"><div class="feature-icon">🎥</div><h2>Guided video lessons</h2><p>Keep instruction in the app with embedded movement videos for each exercise.</p></article>
+      <article class="feature"><div class="feature-icon">🖼️</div><h2>Position reference gallery</h2><p>Review multiple images for each movement and compare the positions step by step.</p></article>
+      <article class="feature"><div class="feature-icon">⏱️</div><h2>Timed movement guidance</h2><p>Move at your pace with adjustable step timing, pause, resume, previous, and next controls.</p></article>
+      <article class="feature"><div class="feature-icon">🔊</div><h2>Voice instructions</h2><p>Listen to each instruction automatically or replay it whenever you need it.</p></article>
+      <article class="feature"><div class="feature-icon">♿</div><h2>Accessible practice modes</h2><p>Use larger text, high contrast, chair-friendly guidance, and a slower session pace.</p></article>
+      <article class="feature"><div class="feature-icon">📈</div><h2>Progress and streaks</h2><p>Track completed days, exercises, practice minutes, and your recent calendar history.</p></article>
+      <article class="feature"><div class="feature-icon">⏰</div><h2>Daily reminders</h2><p>Set a reminder time to make your practice easier to return to each day.</p></article>
+      <article class="feature"><div class="feature-icon">🌐</div><h2>English and Chinese</h2><p>Switch the app language between English and Simplified Chinese.</p></article>
+      <article class="feature"><div class="feature-icon">📱</div><h2>Installable app experience</h2><p>Add Tai Chi Week to your home screen as a lightweight progressive web app.</p></article>
+      <article class="feature"><div class="feature-icon">💾</div><h2>Private local progress</h2><p>Your preferences and progress are saved in the browser on your device.</p></article>
+    </section>
+    <section class="exercise-list" aria-label="Included exercises">
+      <h2>9 guided exercises</h2>
+      <ol>
+        <li>Commencing Form</li><li>Parting the Wild Horse's Mane</li><li>Cloud Hands</li><li>Golden Rooster Stands on One Leg</li><li>Brush Knee and Push</li><li>Kick with Heel</li><li>Grasp the Sparrow's Tail</li><li>Single Whip</li><li>Wave Hands Like Clouds</li>
+      </ol>
+    </section>
+    <div class="actions"><a class="secondary" href="index.html?demo=1">Back to demo</a><a class="primary" href="buy-now.html">Continue to purchase</a></div>
+  </main>
+</body>
+</html>
