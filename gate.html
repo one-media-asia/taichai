@@ -94,23 +94,10 @@ html
 
   <script>
     const payBtn = document.getElementById('payBtn');
+    const directStripeLink = 'https://buy.stripe.com/fZucN57du4Se30o51Z7EQ02';
 
-    payBtn.addEventListener('click', async function() {
-      try {
-        const res = await fetch('/api/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin'
-        });
-        const data = await res.json();
-        if (data && data.url) {
-          window.location.href = data.url;
-          return;
-        }
-        throw new Error(data && data.error ? data.error : 'checkout failed');
-      } catch (e) {
-        alert('Unable to start checkout right now. Please try again.');
-      }
+    payBtn.addEventListener('click', function() {
+      window.location.href = directStripeLink;
     });
 
     async function grantAccessAndGo() {
