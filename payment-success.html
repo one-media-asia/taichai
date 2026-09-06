@@ -117,15 +117,15 @@ html
 <body>
   <div class="success-card">
     <div class="success-icon">✅</div>
-    <h1 class="success-title">Payment Successful!</h1>
-    <p class="success-subtitle">You now have lifetime access to Tai Chi Week.</p>
-    <button class="enter-btn" id="enterBtn">Enter the App</button>
-    <p class="success-subtitle"><a href="gate.html" id="paidLink">Click here if you've paid</a></p>
+    <h1 class="success-title">You’re all set!</h1>
+    <p class="success-subtitle">Thank you for your purchase. Your Tai Chi Week access is now active.</p>
+    <button class="enter-btn" id="enterBtn">Open the App</button>
+    <p class="success-subtitle">Your account will be ready to use right away.</p>
     <div class="install-option">
       <button class="install-option-btn" id="installPwaBtn">📲 Install as App</button>
       <p class="install-option-ios">iOS: tap Share → Add to Home Screen</p>
     </div>
-    <p class="countdown" id="countdown">Redirecting in 5s...</p>
+    <p class="countdown" id="countdown">Redirecting to the app in 5s...</p>
   </div>
 
   <script>
@@ -169,14 +169,6 @@ html
     enterBtn.addEventListener('click', function() {
       window.location.href = 'index.html';
     });
-
-    var paidLink = document.getElementById('paidLink');
-    if (paidLink) {
-      paidLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        window.location.href = 'gate.html';
-      });
-    }
 
     (function() {
       var installBtn = document.getElementById('installPwaBtn');
