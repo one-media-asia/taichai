@@ -1224,10 +1224,10 @@ function startAppDemoTour() {
 
     tourStep += 1;
     state.demoTourIndex = tourStep;
+    state.demoTourTimer = setTimeout(runTourStep, 5000);
   };
 
   runTourStep();
-  state.demoTourTimer = setInterval(runTourStep, 5000);
 }
 
 // ==================== REMINDERS ====================
