@@ -31,6 +31,7 @@ body.demo-mode .day-card,
 body.demo-mode .workout-intro button,
 body.demo-mode #listen-step,
 body.demo-mode .settings-group input,
+body.demo-mode #tab-settings button:not(#demo-buy-now),
 body.demo-mode #reset-progress,
 body.demo-mode #install-btn {
   pointer-events: none;
@@ -38,6 +39,16 @@ body.demo-mode #install-btn {
 }
 
 body.demo-mode .tab-nav { opacity: 0.5; }
+
+.demo-settings-note {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent);
+  background: #fffaf0;
+  color: var(--text-light);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
