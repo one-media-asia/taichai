@@ -1648,10 +1648,20 @@ function showInstallBanner(mode) {
 }
 
 function initPWA() {
+  const topInstallBtn = document.getElementById("top-install-btn");
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
     const installBtn = document.getElementById("install-btn");
+    if (topInstallBtn) topInstallBtn.hidden = false;
+    if (topInstallBtn) topInstallBtn.onclick = () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        topInstallBtn.hidden = true;
+      });
+    };
     if (installBtn) {
       installBtn.style.display = "block";
       installBtn.onclick = () => {
@@ -1672,6 +1682,7 @@ function initPWA() {
     dismissInstallBanner(true);
     const installBtn = document.getElementById("install-btn");
     if (installBtn) installBtn.style.display = "none";
+    if (topInstallBtn) topInstallBtn.hidden = true;
   });
 
   // Softer iOS Add to Home Screen tip
