@@ -1201,44 +1201,56 @@ function stopAppDemoTour() {
 
 function startAppDemoTour() {
   const exerciseIds = Object.keys(EXERCISES);
-  const demoTabs = ["plan", "exercise", "progress", "settings"];
-
-  stopAppDemoTour();
-
-  let tourStep = 0;
-  state.demoTourIndex = 0;
-
-  const runTourStep = () => {
-    const tab = demoTabs[tourStep % demoTabs.length];
-
-    if (tab === "settings" && tourStep > 0) {
-      if (document.getElementById("demo-buy-now")) {
-        const buyButton = document.getElementById("demo-buy-now");
-        buyButton.scrollIntoView({ behavior: "smooth", block: "center" });
-        buyButton.classList.add("demo-buy-now-highlight");
-        setTimeout(() => buyButton.classList.remove("demo-buy-now-highlight"), 1000);
-      }
-      stopAppDemoTour();
-      return;
-    }
-
-    if (tab === "exercise") {
-      const exerciseId = exerciseIds[Math.floor(tourStep / demoTabs.length) % exerciseIds.length];
+  const tourSteps = [
+    () => {
+      state.selectedExercise = null;
+      stopDemo();
+      switchTab("plan");
+    },
+    () => {
+      const exerciseId = exerciseIds[0];
       state.selectedExercise = exerciseId;
       state.currentStep = 0;
       renderExerciseSelector();
       renderDemoArea();
       switchTab("exercise");
       stopDemo();
-    } else {
+    },
+    () => {
       state.selectedExercise = null;
       stopDemo();
-      switchTab(tab);
+      switchTab("progress");
+    },
+    () => {
+      state.selectedExercise = null;
+      stopDemo();
+      switchTab("settings");
+      const buyButton = document.getElementById("demo-buy-now");
+      if (buyButton) {
+        buyButton.scrollIntoView({ behavior: "smooth", block: "center" });
+        buyButton.classList.add("demo-buy-now-highlight");
+        setTimeout(() => buyButton.classList.remove("demo-buy-now-highlight"), 1200);
+      }
+      stopAppDemoTour();
+    }
+  ];
+
+  stopAppDemoTour();
+  state.demoTourIndex = 0;
+
+  const runTourStep = () => {
+    const stepFn = tourSteps[state.demoTourIndex];
+    if (!stepFn) {
+      stopAppDemoTour();
+      return;
     }
 
-    tourStep += 1;
-    state.demoTourIndex = tourStep;
-    state.demoTourTimer = setTimeout(runTourStep, 5000);
+    stepFn();
+    state.demoTourIndex += 1;
+
+    if (state.demoTourIndex < tourSteps.length) {
+      state.demoTourTimer = setTimeout(runTourStep, 5000);
+    }
   };
 
   runTourStep();
@@ -1511,6 +1523,13 @@ function init() {
       switchTab(btn.dataset.tab);
     });
   });
+
+  const buyNowBtn = document.getElementById("demo-buy-now");
+  if (buyNowBtn) {
+    buyNowBtn.addEventListener("click", () => {
+      window.open("https://buy.stripe.com/fZucN57du4Se30o51Z7EQ02", "_blank", "noopener,noreferrer");
+    });
+  }
 
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("demo") === "1") {
