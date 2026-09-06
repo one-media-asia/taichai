@@ -784,7 +784,11 @@ let state = {
   highContrast: false,
   chairMode: false,
   voiceGuidance: false,
-  lastAnnouncedStep: null
+  lastAnnouncedStep: null,
+  experience: "beginner",
+  practiceMode: "standing",
+  sessionLength: "5",
+  onboardingComplete: false
 };
 
 function loadState() {
@@ -802,6 +806,10 @@ function loadState() {
       state.highContrast = parsed.highContrast || false;
       state.chairMode = parsed.chairMode || false;
       state.voiceGuidance = parsed.voiceGuidance || false;
+      state.experience = parsed.experience || "beginner";
+      state.practiceMode = parsed.practiceMode || "standing";
+      state.sessionLength = parsed.sessionLength || "5";
+      state.onboardingComplete = parsed.onboardingComplete || false;
     }
   } catch (e) {
     console.warn("Could not load state:", e);
@@ -820,7 +828,11 @@ function saveState() {
       largeText: state.largeText,
       highContrast: state.highContrast,
       chairMode: state.chairMode,
-      voiceGuidance: state.voiceGuidance
+      voiceGuidance: state.voiceGuidance,
+      experience: state.experience,
+      practiceMode: state.practiceMode,
+      sessionLength: state.sessionLength,
+      onboardingComplete: state.onboardingComplete
     }));
   } catch (e) {
     console.warn("Could not save state:", e);
@@ -849,6 +861,34 @@ function renderWeekGrid() {
     card.addEventListener("click", () => {
       showDayDetail(card.dataset.day);
     });
+  });
+}
+
+function initOnboarding() {
+  const onboarding = document.getElementById("onboarding");
+  const app = document.getElementById("app");
+  const form = document.getElementById("onboarding-form");
+  if (!onboarding || !app || !form) return;
+  onboarding.hidden = state.onboardingComplete;
+  app.hidden = !state.onboardingComplete;
+  if (state.onboardingComplete) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const values = new FormData(form);
+    state.goal = values.get("goal") || "balance";
+    state.experience = values.get("experience") || "beginner";
+    state.practiceMode = values.get("practiceMode") || "standing";
+    state.sessionLength = values.get("sessionLength") || "5";
+    state.chairMode = state.practiceMode === "chair";
+    state.stepDuration = Math.min(10, Math.max(2, Number(state.sessionLength))) * 1000;
+    state.onboardingComplete = true;
+    saveState();
+    onboarding.hidden = true;
+    app.hidden = false;
+    document.body.classList.toggle("chair-mode", state.chairMode);
+    renderGoalSelector();
+    renderWeekGrid();
   });
 }
 
@@ -1074,13 +1114,27 @@ function renderDemoArea() {
 
 function speakCurrentStep() {
   const ex = localizedExercise(state.selectedExercise);
-  if (!ex || !window.speechSynthesis) return;
+  const speech = window.speechSynthesis;
+  const Utterance = window.SpeechSynthesisUtterance;
+  const listenButton = document.getElementById("listen-step");
+  if (!ex || !speech || !Utterance) {
+    if (listenButton) listenButton.textContent = "Voice unavailable";
+    return;
+  }
   const stepIndex = Math.min(state.currentStep, ex.steps.length - 1);
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(ex.steps[stepIndex]);
+  speech.cancel();
+  const utterance = new Utterance(ex.steps[stepIndex]);
+  utterance.lang = currentLocale === "zh-CN" ? "zh-CN" : "en-US";
   utterance.rate = 0.88;
   utterance.pitch = 1;
-  window.speechSynthesis.speak(utterance);
+  if (listenButton) listenButton.textContent = "🔊 Playing";
+  utterance.onend = () => {
+    if (listenButton) listenButton.textContent = "🔊 Listen";
+  };
+  utterance.onerror = () => {
+    if (listenButton) listenButton.textContent = "Voice unavailable";
+  };
+  speech.speak(utterance);
 }
 
 function updateReferenceImage(index) {
@@ -1669,6 +1723,7 @@ function initReset() {
 
 function init() {
   loadState();
+  initOnboarding();
   currentLocale = detectLocale();
   document.documentElement.lang = currentLocale === "zh-CN" ? "zh-CN" : "en";
   applyStaticI18n();
