@@ -183,21 +183,263 @@ body {
   margin-bottom: 16px;
 }
 
+.exercise-video {
+  margin-bottom: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #1d2419;
+}
+
+.exercise-video-heading {
+  padding: 9px 12px;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.exercise-video iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 190px;
+  border: 0;
+}
+
+.exercise-video-fallback {
+  display: block;
+  padding: 7px 12px 9px;
+  color: #e8d5a0;
+  font-size: 0.68rem;
+  text-decoration: none;
+}
+
+.exercise-video-fallback:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.exercise-reference {
+  margin: 0 0 4px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #e9e4d9;
+}
+
+.exercise-reference img {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  object-position: center 35%;
+}
+
+.exercise-reference figcaption {
+  padding: 7px 10px;
+  color: var(--text-light);
+  font-size: 0.68rem;
+  line-height: 1.3;
+}
+
+.exercise-reference-thumbs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 8px 10px 10px;
+  background: #f2eee5;
+}
+
+.reference-thumb {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 7px;
+  background: #d9d5cc;
+  cursor: pointer;
+}
+
+.reference-thumb.active {
+  border-color: var(--primary);
+}
+
+.reference-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.exercise-reference a {
+  color: var(--primary-light);
+  font-weight: 600;
+}
+
 /* Animated step display */
 .step-display {
+  position: relative;
   text-align: center;
   padding: 20px 0;
 }
 
 .step-animation {
-  font-size: 3rem;
-  margin-bottom: 12px;
-  animation: breathe 3s ease-in-out infinite;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 116px;
+  height: 116px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffdf7 0 42%, #e8d5a0 43% 45%, rgba(232,213,160,0.25) 46% 64%, transparent 65%);
+  box-shadow: 0 0 0 1px rgba(196,163,90,0.18), 0 10px 24px rgba(45,80,22,0.12);
+  font-size: 3.4rem;
+  line-height: 1;
+  animation: taiChiFloat 3.4s ease-in-out infinite, taiChiGlow 2.8s ease-in-out infinite;
 }
 
-@keyframes breathe {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.15); opacity: 1; }
+.step-animation::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 2px solid rgba(45,80,22,0.22);
+  border-top-color: var(--primary);
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: taiChiOrbit 4.5s linear infinite;
+}
+
+.step-animation::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px rgba(196,163,90,0.16);
+  animation: taiChiDrift 3.4s ease-in-out infinite;
+}
+
+.step-animation[data-exercise="commencing-form"] {
+  animation-name: taiChiRise, taiChiGlow;
+}
+
+.step-animation[data-exercise="parting-wild-horses-mane"],
+.step-animation[data-exercise="brush-knee"] {
+  animation-name: taiChiSweep, taiChiGlow;
+}
+
+.step-animation[data-exercise="cloud-hands"],
+.step-animation[data-exercise="wave-hands-clouds"] {
+  animation-name: taiChiSway, taiChiGlow;
+}
+
+.step-animation[data-exercise="golden-rooster"] {
+  animation-name: taiChiBalance, taiChiGlow;
+}
+
+.step-animation[data-exercise="kick-heel"] {
+  animation-name: taiChiKick, taiChiGlow;
+}
+
+.step-animation[data-exercise="grasp-sparrows-tail"] {
+  animation-name: taiChiPress, taiChiGlow;
+}
+
+.step-animation[data-exercise="single-whip"] {
+  animation-name: taiChiWhip, taiChiGlow;
+}
+
+.step-animation[data-exercise="parting-wild-horses-mane"]::before,
+.step-animation[data-exercise="brush-knee"]::before,
+.step-animation[data-exercise="single-whip"]::before {
+  animation-name: taiChiSweepRing;
+}
+
+.step-animation[data-exercise="cloud-hands"]::before,
+.step-animation[data-exercise="wave-hands-clouds"]::before {
+  animation-name: taiChiOrbit;
+  animation-duration: 2.8s;
+}
+
+.step-animation[data-exercise="golden-rooster"]::before {
+  animation-name: taiChiBalanceRing;
+}
+
+@keyframes taiChiFloat {
+  0%, 100% { transform: translateY(2px) rotate(-2deg); }
+  50% { transform: translateY(-7px) rotate(2deg); }
+}
+
+@keyframes taiChiRise {
+  0%, 100% { transform: translateY(4px) scale(0.98); }
+  50% { transform: translateY(-8px) scale(1.04); }
+}
+
+@keyframes taiChiSweep {
+  0%, 100% { transform: translate(-4px, 2px) rotate(-7deg); }
+  50% { transform: translate(5px, -4px) rotate(7deg); }
+}
+
+@keyframes taiChiSway {
+  0%, 100% { transform: translateX(-5px) rotate(-5deg); }
+  50% { transform: translateX(5px) rotate(5deg); }
+}
+
+@keyframes taiChiBalance {
+  0%, 100% { transform: translateY(2px) rotate(-2deg); }
+  35% { transform: translateY(-8px) rotate(3deg); }
+  65% { transform: translateY(-8px) rotate(-3deg); }
+}
+
+@keyframes taiChiKick {
+  0%, 65%, 100% { transform: translateY(2px) scale(1); }
+  72% { transform: translate(9px, -8px) scale(1.08) rotate(8deg); }
+  82% { transform: translate(-2px, 2px) scale(0.98); }
+}
+
+@keyframes taiChiPress {
+  0%, 100% { transform: scale(0.98); }
+  45% { transform: scale(1.08); }
+  60% { transform: scale(1.03) translateY(-3px); }
+}
+
+@keyframes taiChiWhip {
+  0%, 100% { transform: translateX(-3px) rotate(-8deg); }
+  50% { transform: translateX(5px) rotate(8deg); }
+}
+
+@keyframes taiChiSweepRing {
+  to { transform: rotate(360deg) scaleX(1.18); }
+}
+
+@keyframes taiChiBalanceRing {
+  0%, 100% { transform: scale(0.94); }
+  50% { transform: scale(1.06); }
+}
+
+@keyframes taiChiGlow {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(196,163,90,0.18), 0 10px 24px rgba(45,80,22,0.12); }
+  50% { box-shadow: 0 0 0 8px rgba(196,163,90,0.1), 0 16px 30px rgba(45,80,22,0.18); }
+}
+
+@keyframes taiChiOrbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes taiChiDrift {
+  0%, 100% { transform: translate(0, 0) scale(0.9); opacity: 0.65; }
+  50% { transform: translate(-7px, 8px) scale(1.15); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-animation,
+  .step-animation::before,
+  .step-animation::after {
+    animation: none;
+  }
 }
 
 .step-text {

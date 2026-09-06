@@ -217,6 +217,135 @@ const EXERCISES = {
   }
 };
 
+const EXERCISE_IMAGES = {
+  "commencing-form": {
+    src: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Mantak.Chia.2022~Tao.Garden~TaiChiPose.jpg",
+    alt: "Tai Chi standing posture in a garden",
+    credit: "Wikimedia Commons",
+    href: "https://commons.wikimedia.org/wiki/File:Mantak.Chia.2022~Tao.Garden~TaiChiPose.jpg"
+  },
+  "parting-wild-horses-mane": {
+    src: "https://upload.wikimedia.org/wikipedia/commons/e/e9/%27TAI-CHI%27_exercises_performed_early_mornings_in_Malacca%2825-10-07_Thursday%29.JPG",
+    alt: "Tai Chi practitioners exercising outdoors",
+    credit: "Rudolph A. Furtado via Wikimedia Commons",
+    href: "https://commons.wikimedia.org/wiki/File:%27TAI-CHI%27_exercises_performed_early_mornings_in_Malacca(25-10-07_Thursday).JPG"
+  },
+  "cloud-hands": {
+    src: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Taoist_Tai_Chi_class.jpg",
+    alt: "Tai Chi class performing Wave Hands Like Clouds",
+    credit: "Diana via Wikimedia Commons",
+    href: "https://commons.wikimedia.org/wiki/File:Taoist_Tai_Chi_class.jpg"
+  },
+  "golden-rooster": {
+    src: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Yang_Zhen_Duo.jpg",
+    alt: "Yang style Tai Chi Golden Rooster Stands On One Leg",
+    credit: "Wikimedia Commons",
+    href: "https://commons.wikimedia.org/wiki/File:Yang_Zhen_Duo.jpg"
+  },
+  "brush-knee": {
+    src: "https://upload.wikimedia.org/wikipedia/commons/a/a4/20091004_1105_Imgp7000.jpg",
+    alt: "Tai Chi practitioner demonstrating a standing movement",
+    credit: "Jakub Hałun via Wikimedia Commons",
+    href: "https://commons.wikimedia.org/wiki/File:20091004_1105_Imgp7000.jpg"
+  },
+  "kick-heel": {
+    src: "https://upload.wikimedia.org/wikipedia/commons/f/f0/20091004_1135_Imgp7058.jpg",
+    alt: "Tai Chi practitioner demonstrating a standing movement",
+    credit: "Jakub Hałun via Wikimedia Commons",
+    href: "https://commons.wikimedia.org/wiki/File:20091004_1135_Imgp7058.jpg"
+  },
+  "grasp-sparrows-tail": {
+    src: "https://upload.wikimedia.org/wikipedia/commons/c/ce/20091004_tai_chi_Hong_Kong_Kowloon_1040_Imgp6903.jpg",
+    alt: "Tai Chi practitioner demonstrating a flowing movement",
+    credit: "Jakub Hałun via Wikimedia Commons",
+    href: "https://commons.wikimedia.org/wiki/File:20091004_tai_chi_Hong_Kong_Kowloon_1040_Imgp6903.jpg"
+  },
+  "single-whip": {
+    src: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Yang-single_%28restoration%29.jpg",
+    alt: "Yang Chengfu demonstrating the Tai Chi Single Whip",
+    credit: "Wikimedia Commons",
+    href: "https://commons.wikimedia.org/wiki/File:Yang-single_%28restoration%29.jpg"
+  },
+  "wave-hands-clouds": {
+    src: "https://upload.wikimedia.org/wikipedia/commons/8/8c/20091004_tai_chi_Hong_Kong_Kowloon_1041_Imgp6905.jpg",
+    alt: "Tai Chi practitioner demonstrating a flowing movement",
+    credit: "Jakub Hałun via Wikimedia Commons",
+    href: "https://commons.wikimedia.org/wiki/File:20091004_tai_chi_Hong_Kong_Kowloon_1041_Imgp6905.jpg"
+  }
+};
+
+const EXERCISE_VIDEOS = {
+  "commencing-form": "https://www.youtube.com/results?search_query=Yang+Style+Tai+Chi+Commencing+Form+instruction",
+  "parting-wild-horses-mane": "https://www.youtube.com/results?search_query=Yang+Style+Tai+Chi+Parting+Wild+Horse%27s+Mane+instruction",
+  "cloud-hands": "https://www.youtube.com/results?search_query=Yang+Style+Tai+Chi+Cloud+Hands+instruction",
+  "golden-rooster": "https://www.youtube.com/results?search_query=Yang+Style+Tai+Chi+Golden+Rooster+Stands+On+One+Leg+instruction",
+  "brush-knee": "https://www.youtube.com/results?search_query=Yang+Style+Tai+Chi+Brush+Knee+and+Push+instruction",
+  "kick-heel": "https://www.youtube.com/results?search_query=Yang+Style+Tai+Chi+Heel+Kick+instruction",
+  "grasp-sparrows-tail": "https://www.youtube.com/results?search_query=Yang+Style+Tai+Chi+Grasp+the+Sparrow%27s+Tail+instruction",
+  "single-whip": "https://www.youtube.com/results?search_query=Yang+Style+Tai+Chi+Single+Whip+instruction",
+  "wave-hands-clouds": "https://www.youtube.com/results?search_query=Yang+Style+Tai+Chi+Wave+Hands+Like+Clouds+instruction"
+};
+
+const EXERCISE_VIDEO_IDS = {
+  "commencing-form": "e4VIw41R-PU",
+  "parting-wild-horses-mane": "JxGP6dFZiqo",
+  "cloud-hands": "jGTFq5yaAwU",
+  "golden-rooster": "JqGI-LW0Oq4",
+  "brush-knee": "tzohR4YOT1o",
+  "kick-heel": "ipbQ4PP5FLQ",
+  "grasp-sparrows-tail": "IDJStNgn5IM",
+  "single-whip": "gv-27qokbLs",
+  "wave-hands-clouds": "jGTFq5yaAwU"
+};
+
+function getEmbeddedVideoUrl(exerciseId) {
+  const videoId = EXERCISE_VIDEO_IDS[exerciseId];
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
+}
+
+const EXERCISE_GALLERIES = {
+  "commencing-form": [
+    EXERCISE_IMAGES["commencing-form"],
+    { src: "https://upload.wikimedia.org/wikipedia/commons/d/da/Embracing_Tai_Chi.jpg", alt: "Tai Chi practitioner in a centered posture", credit: "Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Embracing_Tai_Chi.jpg" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/d/db/Elderly_Shanghai_woman_practices_tai_chi.jpg", alt: "Tai Chi practitioner standing in a park", credit: "Tom Thai via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Elderly_Shanghai_woman_practices_tai_chi.jpg" }
+  ],
+  "parting-wild-horses-mane": [
+    EXERCISE_IMAGES["parting-wild-horses-mane"],
+    { src: "https://upload.wikimedia.org/wikipedia/commons/3/36/Chen_Tai_Ji_at_Culture_Fest.jpg", alt: "Tai Chi practitioner with arms open in a wide stance", credit: "Melissa Sanders via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Chen_Tai_Ji_at_Culture_Fest.jpg" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/5/50/ANDREA_SPOLAOR_-_FOTO_CLAUDIO_ETGES_%281%29_copy.jpg", alt: "Tai Chi practitioner demonstrating a form", credit: "Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:ANDREA_SPOLAOR_-_FOTO_CLAUDIO_ETGES_(1)_copy.jpg" }
+  ],
+  "cloud-hands": [
+    EXERCISE_IMAGES["cloud-hands"],
+    { src: "https://upload.wikimedia.org/wikipedia/commons/8/8c/20091004_tai_chi_Hong_Kong_Kowloon_1041_Imgp6905.jpg", alt: "Tai Chi practitioner demonstrating a flowing movement", credit: "Jakub Hałun via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:20091004_tai_chi_Hong_Kong_Kowloon_1041_Imgp6905.jpg" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/20091004_tai_chi_Hong_Kong_Kowloon_6899.jpg", alt: "Tai Chi practitioner demonstrating a flowing movement", credit: "Jakub Hałun via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:20091004_tai_chi_Hong_Kong_Kowloon_6899.jpg" }
+  ],
+  "golden-rooster": [
+    EXERCISE_IMAGES["golden-rooster"],
+    { src: "https://upload.wikimedia.org/wikipedia/commons/9/91/CN_Shanghai_0806_%2857%29_%2817212395872%29.jpg", alt: "Tai Chi practitioner holding a balanced stance", credit: "Diego Tirira via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:CN_Shanghai_0806_(57)_(17212395872).jpg" }
+  ],
+  "brush-knee": [EXERCISE_IMAGES["brush-knee"], EXERCISE_IMAGES["parting-wild-horses-mane"], EXERCISE_IMAGES["grasp-sparrows-tail"]],
+  "kick-heel": [EXERCISE_IMAGES["kick-heel"], EXERCISE_IMAGES["golden-rooster"], { src: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Defense.gov_photo_essay_091217-N-0696M-546.jpg", alt: "Tai Chi practitioner lifting a leg", credit: "U.S. Navy via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Defense.gov_photo_essay_091217-N-0696M-546.jpg" }],
+  "grasp-sparrows-tail": [EXERCISE_IMAGES["grasp-sparrows-tail"], EXERCISE_IMAGES["cloud-hands"], EXERCISE_IMAGES["single-whip"]],
+  "single-whip": [EXERCISE_IMAGES["single-whip"], EXERCISE_IMAGES["parting-wild-horses-mane"], EXERCISE_IMAGES["brush-knee"]],
+  "wave-hands-clouds": [EXERCISE_IMAGES["wave-hands-clouds"], EXERCISE_IMAGES["cloud-hands"], { src: "https://upload.wikimedia.org/wikipedia/commons/1/1f/20091004_tai_chi_Hong_Kong_Kowloon_6888.jpg", alt: "Tai Chi practitioners demonstrating a flowing movement", credit: "Jakub Hałun via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:20091004_tai_chi_Hong_Kong_Kowloon_6888.jpg" }]
+};
+
+const EXTRA_POSITION_IMAGES = [
+  { src: "https://upload.wikimedia.org/wikipedia/commons/d/d0/20091004_1135_Imgp7061.jpg", alt: "Tai Chi practitioner demonstrating a standing movement", credit: "Jakub Hałun via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:20091004_1135_Imgp7061.jpg" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/5/53/20091004_tai_chi_Hong_Kong_Kowloon_6887.jpg", alt: "Tai Chi practitioner demonstrating a flowing movement", credit: "Jakub Hałun via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:20091004_tai_chi_Hong_Kong_Kowloon_6887.jpg" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/1/1f/20091004_tai_chi_Hong_Kong_Kowloon_6888.jpg", alt: "Tai Chi practitioner demonstrating a flowing movement", credit: "Jakub Hałun via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:20091004_tai_chi_Hong_Kong_Kowloon_6888.jpg" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/d/db/Elderly_Shanghai_woman_practices_tai_chi.jpg", alt: "Tai Chi practitioner standing in a park", credit: "Tom Thai via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Elderly_Shanghai_woman_practices_tai_chi.jpg" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/3/36/Chen_Tai_Ji_at_Culture_Fest.jpg", alt: "Tai Chi practitioner with arms open in a wide stance", credit: "Melissa Sanders via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Chen_Tai_Ji_at_Culture_Fest.jpg" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/5/50/ANDREA_SPOLAOR_-_FOTO_CLAUDIO_ETGES_%281%29_copy.jpg", alt: "Tai Chi practitioner demonstrating a form", credit: "Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:ANDREA_SPOLAOR_-_FOTO_CLAUDIO_ETGES_(1)_copy.jpg" },
+  { src: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Aulalassance.jpg", alt: "Tai Chi class practicing together", credit: "Sergio Luiz Villasboas via Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Aulalassance.jpg" },
+  EXERCISE_IMAGES["single-whip"]
+];
+
+function getExerciseGallery(exerciseId) {
+  const images = [...(EXERCISE_GALLERIES[exerciseId] || [EXERCISE_IMAGES[exerciseId]]), ...EXTRA_POSITION_IMAGES];
+  return images.filter((image, index, all) => image && all.findIndex((candidate) => candidate.src === image.src) === index).slice(0, 10);
+}
+
 // ==================== I18N ====================
 
 const I18N = {
@@ -747,12 +876,29 @@ function renderDemoArea() {
 
   const ex = localizedExercise(state.selectedExercise);
   if (!ex) return;
+  const image = EXERCISE_IMAGES[state.selectedExercise];
+  const gallery = getExerciseGallery(state.selectedExercise);
+  const firstImage = gallery[0];
+  const videoUrl = EXERCISE_VIDEOS[state.selectedExercise];
+  const embeddedVideoUrl = getEmbeddedVideoUrl(state.selectedExercise);
 
   demoArea.innerHTML = `
     <div class="demo-exercise-name">${ex.name}</div>
     <div class="demo-exercise-benefit">${ex.benefit}</div>
+    <div class="exercise-video">
+      <div class="exercise-video-heading">${ex.name.split("(")[0].trim()} instruction</div>
+      <iframe src="${embeddedVideoUrl}" title="${ex.name} instructional videos" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <a class="exercise-video-fallback" href="${videoUrl}" target="_blank" rel="noopener noreferrer">Open video search in a new tab</a>
+    </div>
+    ${image ? `<figure class="exercise-reference" data-exercise="${state.selectedExercise}">
+      <img id="exercise-reference-image" src="${firstImage.src}" alt="${firstImage.alt}" loading="eager">
+      <figcaption>Position reference <span id="exercise-reference-count">1 / ${gallery.length}</span> · <a id="exercise-reference-link" href="${firstImage.href}" target="_blank" rel="noopener noreferrer">${firstImage.credit}</a></figcaption>
+      <div class="exercise-reference-thumbs" id="exercise-reference-thumbs" aria-label="Position reference images">
+        ${gallery.map((frame, index) => `<button type="button" class="reference-thumb${index === 0 ? " active" : ""}" data-reference-index="${index}" aria-label="View position image ${index + 1}"><img src="${frame.src}" alt=""></button>`).join("")}
+      </div>
+    </figure>` : ""}
     <div class="step-display">
-      <div class="step-animation" id="step-emoji">🧘</div>
+      <div class="step-animation" id="step-emoji" data-exercise="${state.selectedExercise}">🧘</div>
       <div class="step-text" id="step-text">${t("pressStart")}</div>
       <div class="step-counter" id="step-counter">${t("stepOf", { x: 0, y: ex.steps.length })}</div>
     </div>
@@ -783,6 +929,27 @@ function renderDemoArea() {
       goToStep(parseInt(item.dataset.step, 10));
     });
   });
+
+  demoArea.querySelectorAll(".reference-thumb").forEach((thumb) => {
+    thumb.addEventListener("click", () => updateReferenceImage(parseInt(thumb.dataset.referenceIndex, 10)));
+  });
+}
+
+function updateReferenceImage(index) {
+  const gallery = getExerciseGallery(state.selectedExercise);
+  const reference = gallery[index];
+  const referenceImage = document.getElementById("exercise-reference-image");
+  const referenceCount = document.getElementById("exercise-reference-count");
+  const referenceLink = document.getElementById("exercise-reference-link");
+  if (!reference || !referenceImage) return;
+  referenceImage.src = reference.src;
+  referenceImage.alt = reference.alt;
+  referenceLink.href = reference.href;
+  referenceLink.textContent = reference.credit;
+  referenceCount.textContent = `${index + 1} / ${gallery.length}`;
+  document.querySelectorAll(".reference-thumb").forEach((thumb, thumbIndex) => {
+    thumb.classList.toggle("active", thumbIndex === index);
+  });
 }
 
 function updateDemoDisplay() {
@@ -797,6 +964,9 @@ function updateDemoDisplay() {
   const startBtn = document.getElementById("demo-start");
   const prevBtn = document.getElementById("demo-prev");
   const nextBtn = document.getElementById("demo-next");
+  const referenceImage = document.getElementById("exercise-reference-image");
+  const referenceCount = document.getElementById("exercise-reference-count");
+  const referenceLink = document.getElementById("exercise-reference-link");
 
   if (!stepText || !startBtn) return;
 
@@ -812,9 +982,12 @@ function updateDemoDisplay() {
   }
 
   const stepIndex = Math.min(state.currentStep, ex.steps.length - 1);
+  const gallery = getExerciseGallery(state.selectedExercise);
+  const referenceIndex = Math.min(stepIndex, gallery.length - 1);
+  if (referenceImage && gallery[referenceIndex]) updateReferenceImage(referenceIndex);
   stepText.textContent = ex.steps[stepIndex];
   stepCounter.textContent = t("stepOf", { x: stepIndex + 1, y: ex.steps.length });
-  stepEmoji.textContent = getStepEmoji(stepIndex, ex.steps.length);
+  stepEmoji.textContent = getStepEmoji(stepIndex, state.selectedExercise);
   progressFill.style.width = `${((stepIndex + 1) / ex.steps.length) * 100}%`;
 
   startBtn.textContent = state.demoRunning ? t("pause") : t("resume");
@@ -831,8 +1004,19 @@ function updateDemoDisplay() {
   }
 }
 
-function getStepEmoji(step) {
-  const emojis = ["🧘", "🌬️", "⬆️", "⬇️", "🔄", "👐", "🦶", "💪", "✨", "🎯"];
+function getStepEmoji(step, exerciseId) {
+  const exerciseEmojis = {
+    "commencing-form": ["🧘", "🌬️", "⬆️", "⬇️", "🌱", "🧘"],
+    "parting-wild-horses-mane": ["👐", "↔️", "🌿", "👐", "↔️", "🌿"],
+    "cloud-hands": ["☁️", "🔄", "↔️", "☁️", "🔄", "↔️"],
+    "golden-rooster": ["🧘", "⚖️", "🦵", "🧘", "⚖️", "🦵"],
+    "brush-knee": ["🧘", "🫳", "➡️", "↔️", "🫳", "➡️"],
+    "kick-heel": ["🦶", "⬆️", "💥", "↩️", "🦶", "💥"],
+    "grasp-sparrows-tail": ["👐", "↩️", "🤲", "➡️", "👐", "🌊"],
+    "single-whip": ["🪢", "↔️", "➡️", "👐", "🎯", "🪢"],
+    "wave-hands-clouds": ["☁️", "🔄", "↔️", "☁️", "🔄", "↔️"]
+  };
+  const emojis = exerciseEmojis[exerciseId] || ["🧘", "🌬️", "⬆️", "⬇️", "🔄", "👐", "🦶", "💪", "✨", "🎯"];
   return emojis[step % emojis.length];
 }
 
