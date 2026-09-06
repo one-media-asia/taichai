@@ -85,6 +85,41 @@ const WEEK_PLAN = [
   }
 ];
 
+const GOAL_RECOMMENDATIONS = {
+  balance: {
+    icon: "⚖️",
+    name: "Improve balance",
+    detail: "Start with Tuesday's Balance & Leg Strength plan.",
+    day: "Tuesday",
+    exercises: ["golden-rooster", "brush-knee", "kick-heel"],
+    minutes: 12
+  },
+  mobility: {
+    icon: "🌿",
+    name: "Move more freely",
+    detail: "Start with Friday's Flexibility & Stretch plan.",
+    day: "Friday",
+    exercises: ["brush-knee", "golden-rooster", "cloud-hands"],
+    minutes: 10
+  },
+  calm: {
+    icon: "🌬️",
+    name: "Feel calmer",
+    detail: "Start with Monday's Foundation & Breathing plan.",
+    day: "Monday",
+    exercises: ["commencing-form", "parting-wild-horses-mane", "cloud-hands"],
+    minutes: 8
+  },
+  strength: {
+    icon: "💪",
+    name: "Build strength",
+    detail: "Start with Tuesday's Balance & Leg Strength plan.",
+    day: "Tuesday",
+    exercises: ["golden-rooster", "brush-knee", "kick-heel"],
+    minutes: 12
+  }
+};
+
 const EXERCISES = {
   "commencing-form": {
     name: "Commencing Form (起势)",
@@ -357,7 +392,7 @@ const I18N = {
     subtitle: "Yang Style · 7-Day Journey",
     documentTitle: "Tai Chi Week Planner",
     tabPlan: "📅 Plan",
-    tabDemo: "🏋️ Demo",
+    tabDemo: "🏋️ Workout",
     tabProgress: "📊 Progress",
     tabSettings: "⚙️ Settings",
     placeholder: "Select an exercise above to begin the demonstration.",
@@ -423,7 +458,7 @@ const I18N = {
     subtitle: "杨氏 · 七日之旅",
     documentTitle: "太极周计划",
     tabPlan: "📅 计划",
-    tabDemo: "🏋️ 演示",
+    tabDemo: "🏋️ 训练",
     tabProgress: "📊 进度",
     tabSettings: "⚙️ 设置",
     placeholder: "请在上方选择一个动作开始演示。",
@@ -733,6 +768,7 @@ function initLangToggles() {
 
 let state = {
   currentTab: "plan",
+  goal: "balance",
   selectedExercise: null,
   demoRunning: false,
   demoInterval: null,
@@ -742,7 +778,13 @@ let state = {
   stepDuration: 4000,
   completedDays: [],
   completedExercises: [],
-  lastActiveDate: null
+  lastActiveDate: null,
+  totalMinutes: 0,
+  largeText: false,
+  highContrast: false,
+  chairMode: false,
+  voiceGuidance: false,
+  lastAnnouncedStep: null
 };
 
 function loadState() {
@@ -754,6 +796,12 @@ function loadState() {
       state.completedExercises = parsed.completedExercises || [];
       state.lastActiveDate = parsed.lastActiveDate || null;
       state.stepDuration = parsed.stepDuration || 4000;
+      state.goal = parsed.goal || "balance";
+      state.totalMinutes = parsed.totalMinutes || 0;
+      state.largeText = parsed.largeText || false;
+      state.highContrast = parsed.highContrast || false;
+      state.chairMode = parsed.chairMode || false;
+      state.voiceGuidance = parsed.voiceGuidance || false;
     }
   } catch (e) {
     console.warn("Could not load state:", e);
@@ -766,7 +814,13 @@ function saveState() {
       completedDays: state.completedDays,
       completedExercises: state.completedExercises,
       lastActiveDate: state.lastActiveDate,
-      stepDuration: state.stepDuration
+      stepDuration: state.stepDuration,
+      goal: state.goal,
+      totalMinutes: state.totalMinutes,
+      largeText: state.largeText,
+      highContrast: state.highContrast,
+      chairMode: state.chairMode,
+      voiceGuidance: state.voiceGuidance
     }));
   } catch (e) {
     console.warn("Could not save state:", e);
@@ -796,6 +850,66 @@ function renderWeekGrid() {
       showDayDetail(card.dataset.day);
     });
   });
+}
+
+function renderGoalSelector() {
+  const selector = document.getElementById("goal-selector");
+  if (!selector) return;
+  const goals = [
+    { id: "balance", icon: "⚖️", name: "Improve balance", detail: "Steady movement and confidence" },
+    { id: "mobility", icon: "🌿", name: "Move more freely", detail: "Gentle mobility and flexibility" },
+    { id: "calm", icon: "🌬️", name: "Feel calmer", detail: "Breathing and mindful flow" },
+    { id: "strength", icon: "💪", name: "Build strength", detail: "Legs, posture, and stability" }
+  ];
+  const selectedGoal = GOAL_RECOMMENDATIONS[state.goal] || GOAL_RECOMMENDATIONS.balance;
+  selector.innerHTML = `
+    <div class="goal-heading">
+      <div>
+        <span class="workout-kicker">Your practice</span>
+        <h2>What would you like to improve?</h2>
+        <p>Choose a focus and use this week as your starting point.</p>
+      </div>
+      <strong>${selectedGoal.icon} ${selectedGoal.name}</strong>
+    </div>
+    <div class="goal-options" role="group" aria-label="Practice goal">
+      ${goals.map((goal) => `
+        <button type="button" class="goal-option ${goal.id === state.goal ? "active" : ""}" data-goal="${goal.id}">
+          <span class="goal-icon">${goal.icon}</span>
+          <span><b>${goal.name}</b><small>${goal.detail}</small></span>
+        </button>
+      `).join("")}
+    </div>
+    <div class="goal-recommendation">
+      <strong>Recommended starting point</strong>
+      <span>${selectedGoal.detail}</span>
+      <small>${selectedGoal.minutes} minutes · ${selectedGoal.exercises.length} movements · ${selectedGoal.exercises.map((id) => chipLabel(id)).join(" · ")}</small>
+    </div>
+    <button type="button" class="btn-primary goal-continue" id="start-goal-practice">Start recommended workout</button>
+  `;
+  selector.querySelectorAll(".goal-option").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.goal = button.dataset.goal;
+      saveState();
+      renderGoalSelector();
+    });
+  });
+  selector.querySelector("#start-goal-practice").addEventListener("click", startGoalPractice);
+}
+
+function startGoalPractice() {
+  const recommendation = GOAL_RECOMMENDATIONS[state.goal] || GOAL_RECOMMENDATIONS.balance;
+  const firstExercise = recommendation.exercises[0];
+  if (!firstExercise) return;
+  if (allowDemoPreview && firstExercise !== Object.keys(EXERCISES)[0]) {
+    window.location.href = "buy-now.html";
+    return;
+  }
+  state.selectedExercise = firstExercise;
+  state.currentStep = 0;
+  renderExerciseSelector();
+  renderDemoArea();
+  switchTab("exercise");
+  startDemo();
 }
 
 function showDayDetail(dayName) {
@@ -847,11 +961,12 @@ function renderExerciseSelector() {
   const selector = document.getElementById("exercise-selector");
   const allExercises = Object.keys(EXERCISES);
 
-  selector.innerHTML = allExercises.map((id) => {
+  selector.innerHTML = allExercises.map((id, index) => {
     const isActive = state.selectedExercise === id;
+    const isLocked = allowDemoPreview && index > 0;
     return `
-      <div class="exercise-chip ${isActive ? "active" : ""}" data-exercise="${id}">
-        ${chipLabel(id)}
+      <div class="exercise-chip ${isActive ? "active" : ""} ${isLocked ? "locked" : ""}" data-exercise="${id}" aria-disabled="${isLocked}">
+        ${chipLabel(id)}${isLocked ? " 🔒" : ""}
       </div>
     `;
   }).join("");
@@ -875,6 +990,10 @@ function startFirstWorkout() {
 }
 
 function selectExercise(exId) {
+  if (allowDemoPreview && exId !== Object.keys(EXERCISES)[0]) {
+    window.location.href = "buy-now.html";
+    return;
+  }
   state.selectedExercise = exId;
   state.currentStep = 0;
   stopDemo();
@@ -917,6 +1036,7 @@ function renderDemoArea() {
       <div class="step-animation" id="step-emoji" data-exercise="${state.selectedExercise}">🧘</div>
       <div class="step-text" id="step-text">${t("pressStart")}</div>
       <div class="step-counter" id="step-counter">${t("stepOf", { x: 0, y: ex.steps.length })}</div>
+      <button class="listen-step-btn" id="listen-step" type="button" aria-label="Listen to instruction">🔊 Listen</button>
     </div>
     <div class="progress-bar-wrap">
       <div class="progress-bar-fill" id="demo-progress" style="width:0%"></div>
@@ -939,6 +1059,7 @@ function renderDemoArea() {
   document.getElementById("demo-start").addEventListener("click", toggleDemo);
   document.getElementById("demo-prev").addEventListener("click", prevStep);
   document.getElementById("demo-next").addEventListener("click", nextStep);
+  document.getElementById("listen-step").addEventListener("click", speakCurrentStep);
 
   demoArea.querySelectorAll(".step-list-item").forEach((item) => {
     item.addEventListener("click", () => {
@@ -949,6 +1070,17 @@ function renderDemoArea() {
   demoArea.querySelectorAll(".reference-thumb").forEach((thumb) => {
     thumb.addEventListener("click", () => updateReferenceImage(parseInt(thumb.dataset.referenceIndex, 10)));
   });
+}
+
+function speakCurrentStep() {
+  const ex = localizedExercise(state.selectedExercise);
+  if (!ex || !window.speechSynthesis) return;
+  const stepIndex = Math.min(state.currentStep, ex.steps.length - 1);
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(ex.steps[stepIndex]);
+  utterance.rate = 0.88;
+  utterance.pitch = 1;
+  window.speechSynthesis.speak(utterance);
 }
 
 function updateReferenceImage(index) {
@@ -1002,6 +1134,12 @@ function updateDemoDisplay() {
   const referenceIndex = Math.min(stepIndex, gallery.length - 1);
   if (referenceImage && gallery[referenceIndex]) updateReferenceImage(referenceIndex);
   stepText.textContent = ex.steps[stepIndex];
+  if (state.voiceGuidance && state.lastAnnouncedStep !== `${state.selectedExercise}:${stepIndex}`) {
+    state.lastAnnouncedStep = `${state.selectedExercise}:${stepIndex}`;
+    if (window.speechSynthesis) {
+      speakCurrentStep();
+    }
+  }
   stepCounter.textContent = t("stepOf", { x: stepIndex + 1, y: ex.steps.length });
   stepEmoji.textContent = getStepEmoji(stepIndex, state.selectedExercise);
   progressFill.style.width = `${((stepIndex + 1) / ex.steps.length) * 100}%`;
@@ -1107,6 +1245,8 @@ function goToStep(step) {
 function markExerciseCompleted(exId) {
   if (!state.completedExercises.includes(exId)) {
     state.completedExercises.push(exId);
+    const ex = localizedExercise(exId);
+    state.totalMinutes += ex ? Math.max(1, Math.ceil((ex.steps.length * state.stepDuration) / 60000)) : 1;
     saveState();
     renderProgress();
   }
@@ -1128,6 +1268,7 @@ function markExerciseCompleted(exId) {
 function renderProgress() {
   document.getElementById("stat-days").textContent = state.completedDays.length;
   document.getElementById("stat-exercises").textContent = state.completedExercises.length;
+  document.getElementById("stat-minutes").textContent = state.totalMinutes;
 
   let streak = 0;
   const now = new Date();
@@ -1181,6 +1322,10 @@ function switchTab(tabName) {
 
   if (tabName !== "exercise") {
     stopDemo();
+  }
+  if (allowDemoPreview && tabName === "settings") {
+    window.location.href = "buy-now.html";
+    return;
   }
 
   document.querySelectorAll(".tab-btn").forEach((btn) => {
@@ -1485,6 +1630,23 @@ function initSettings() {
     stepVal.textContent = `${stepSlider.value}s`;
     saveState();
   });
+
+  const settings = [
+    ["large-text-toggle", "largeText", "large-text"],
+    ["contrast-toggle", "highContrast", "high-contrast"],
+    ["chair-mode-toggle", "chairMode", "chair-mode"],
+    ["voice-toggle", "voiceGuidance", "voice-guidance"]
+  ];
+  settings.forEach(([id, key, className]) => {
+    const input = document.getElementById(id);
+    input.checked = state[key];
+    input.addEventListener("change", () => {
+      state[key] = input.checked;
+      document.body.classList.toggle(className, input.checked);
+      saveState();
+    });
+    document.body.classList.toggle(className, state[key]);
+  });
 }
 
 // ==================== RESET ====================
@@ -1495,6 +1657,7 @@ function initReset() {
       state.completedDays = [];
       state.completedExercises = [];
       state.lastActiveDate = null;
+      state.totalMinutes = 0;
       saveState();
       renderWeekGrid();
       renderProgress();
@@ -1512,6 +1675,7 @@ function init() {
   initLangToggles();
   updateLangToggleUI();
   renderWeekGrid();
+  renderGoalSelector();
   renderExerciseSelector();
   renderDemoArea();
   document.getElementById("start-first-workout").addEventListener("click", startFirstWorkout);

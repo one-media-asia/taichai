@@ -17,6 +17,11 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+body.large-text { font-size: 112%; }
+body.high-contrast { --bg: #ffffff; --card-bg: #ffffff; --text: #111111; --text-light: #333333; --border: #555555; }
+body.chair-mode .exercise-video-heading::after { content: " · Chair-friendly option"; color: var(--primary-light); }
+body.voice-guidance .step-display { border-left: 4px solid var(--accent); }
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   background: var(--bg);
@@ -85,6 +90,95 @@ body {
 .tab-content.active { display: block; }
 
 /* Week grid */
+.goal-selector {
+  margin-bottom: 16px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f4f8ee, #fffaf0);
+}
+
+.goal-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.goal-heading h2 {
+  margin: 4px 0 5px;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.goal-heading p {
+  color: var(--text-light);
+  font-size: 0.78rem;
+}
+
+.goal-heading strong {
+  color: var(--primary);
+  font-size: 0.78rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.goal-recommendation {
+  display: grid;
+  gap: 3px;
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent);
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.78rem;
+}
+
+.goal-recommendation strong { color: var(--primary); }
+.goal-recommendation span { color: var(--text); }
+.goal-recommendation small { color: var(--text-light); font-size: 0.68rem; }
+
+.goal-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.goal-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--card-bg);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.goal-option.active {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.goal-icon { font-size: 1.25rem; }
+.goal-option b, .goal-option small { display: block; }
+.goal-option b { font-size: 0.76rem; }
+.goal-option small { margin-top: 2px; color: var(--text-light); font-size: 0.64rem; }
+
+.goal-continue {
+  width: 100%;
+  margin-top: 12px;
+}
+
+@media (max-width: 380px) {
+  .goal-heading { flex-direction: column; }
+  .goal-heading strong { text-align: left; }
+  .goal-options { grid-template-columns: 1fr; }
+}
+
 .week-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -191,6 +285,11 @@ body {
   background: var(--primary);
   color: white;
   border-color: var(--primary);
+}
+
+.exercise-chip.locked {
+  color: var(--text-light);
+  background: #f4f1ea;
 }
 
 /* Demo area */
@@ -321,6 +420,20 @@ body {
   text-align: center;
   padding: 20px 0;
 }
+
+.listen-step-btn {
+  margin-top: 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: var(--card-bg);
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.listen-step-btn:hover { border-color: var(--primary); }
 
 .step-animation {
   position: relative;

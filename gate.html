@@ -140,6 +140,26 @@ html
       line-height: 1.5;
       margin-bottom: 18px;
     }
+    .demo-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .demo-feature {
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #fffdf8;
+      color: var(--text);
+      font-size: 0.76rem;
+      line-height: 1.35;
+    }
+    .demo-feature strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--primary);
+    }
     .demo-preview {
       background: #f7f3eb;
       border: 1px solid var(--border);
@@ -204,9 +224,17 @@ html
       <button class="demo-close" id="demoClose" type="button" aria-label="Close demo">&times;</button>
       <div class="demo-kicker">Tai Chi Week</div>
       <h2 class="demo-title" id="demoTitle">A calm, guided daily practice</h2>
-      <p class="demo-description">The full app gives you a seven-day plan, animated step guidance, progress tracking, and reminders. Here is a sample from Monday's foundation practice.</p>
+      <p class="demo-description">Your one-time unlock gives you a practical routine you can return to every day. Here is what the full app includes:</p>
+      <div class="demo-features" aria-label="App features">
+        <div class="demo-feature"><strong>🎯 Personal goals</strong>Choose balance, mobility, calm, or strength.</div>
+        <div class="demo-feature"><strong>📅 7-day plan</strong>A clear daily path from foundation to full form.</div>
+        <div class="demo-feature"><strong>🎥 Guided workouts</strong>Follow video, position images, and timed steps.</div>
+        <div class="demo-feature"><strong>♿ Accessible practice</strong>Larger text, high contrast, chair mode, and voice guidance.</div>
+        <div class="demo-feature"><strong>📈 Progress tracking</strong>Build a streak and see days, exercises, and minutes practiced.</div>
+        <div class="demo-feature"><strong>⏰ Daily reminders</strong>Set a time that helps your practice become a habit.</div>
+      </div>
+      <div class="demo-preview-heading">Sample: Commencing Form</div>
       <div class="demo-preview">
-        <div class="demo-preview-heading">Commencing Form</div>
         <div class="demo-step"><span class="demo-step-number">1</span><span>Stand with feet shoulder-width apart, arms relaxed at your sides.</span></div>
         <div class="demo-step"><span class="demo-step-number">2</span><span>Inhale slowly as you raise arms forward to shoulder height, palms facing down.</span></div>
         <div class="demo-step"><span class="demo-step-number">3</span><span>Exhale as you bend elbows and press palms downward, as if pushing water.</span></div>
