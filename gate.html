@@ -89,12 +89,24 @@ html
     <h1 class="gate-title">Tai Chi Week</h1>
     <p class="gate-subtitle">One-time payment unlocks the full 7-day Yang Style journey — lifetime access.</p>
     <button class="pay-btn" id="payBtn" type="button">Pay Now to Access</button>
-    <p class="gate-note">Secure payment via Stripe. You'll be redirected back after payment.<br>Already paid? <a href="#" onclick="grantAccessAndGo(); return false;">Click here if you've paid</a></p>
+    <p class="gate-note">Secure payment via Stripe. You'll be redirected back after payment.<br>Already paid? <a href="#" onclick="grantAccessAndGo(); return false;">Click here if you've paid</a><br><a href="?bypass=onemedia" onclick="document.cookie='taichi_access=granted; path=/; SameSite=Lax'; try{localStorage.setItem('taiChi_access_granted','1')}catch(e){}; return true;">Owner bypass</a></p>
   </div>
 
   <script>
     const payBtn = document.getElementById('payBtn');
     const directStripeLink = 'https://buy.stripe.com/fZucN57du4Se30o51Z7EQ02';
+    const ownerBypassValue = 'onemedia';
+
+    function grantOwnerBypass() {
+      document.cookie = 'taichi_access=granted; path=/; SameSite=Lax';
+      try { localStorage.setItem('taiChi_access_granted', '1'); } catch (e) { /* ignore */ }
+      window.location.href = 'index.html';
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('bypass') === ownerBypassValue) {
+      grantOwnerBypass();
+    }
 
     payBtn.addEventListener('click', function() {
       window.location.href = directStripeLink;

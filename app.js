@@ -3,14 +3,29 @@
 // ==================== DATA (English source of truth; day keys stay English) ====================
 
 // ==================== ACCESS GATE ====================
-// Prefer a server-backed grant check so the app verifies access instead of trusting
-// a browser-only flag alone.
+// Personal owner bypass used for local testing or self-access without Stripe.
+const OWNER_BYPASS_KEY = 'onemedia';
+const ownerBypassParam = new URLSearchParams(window.location.search).get('bypass');
+
+function grantOwnerBypass() {
+  document.cookie = 'taichi_access=granted; path=/; SameSite=Lax';
+  try { localStorage.setItem('taiChi_access_granted', '1'); } catch (err) { /* ignore */ }
+}
+
+if (ownerBypassParam === OWNER_BYPASS_KEY) {
+  grantOwnerBypass();
+}
+
 (async function() {
   try {
     const res = await fetch('/api/check-access', { credentials: 'same-origin' });
     const data = await res.json();
     if (!data.authorized) {
-      window.location.replace('gate.html');
+      if (ownerBypassParam === OWNER_BYPASS_KEY) {
+        window.location.replace('index.html');
+      } else {
+        window.location.replace('gate.html');
+      }
     }
   } catch (e) {
     // Keep the earlier local fallback so existing browsers still work during migration.
@@ -22,7 +37,7 @@
       }, {});
       var _lsAccess = false;
       try { _lsAccess = localStorage.getItem('taiChi_access_granted') === '1'; } catch (err) { /* ignore */ }
-      if (_lsAccess !== true && _cookies.taichi_access !== 'granted') {
+      if ((_lsAccess !== true && _cookies.taichi_access !== 'granted') && ownerBypassParam !== OWNER_BYPASS_KEY) {
         window.location.replace('gate.html');
       }
     } catch (err) { /* ignore */ }
