@@ -221,7 +221,6 @@ html
     const demoModal = document.getElementById('demoModal');
     const demoClose = document.getElementById('demoClose');
     const demoCta = document.getElementById('demoCta');
-    const directStripeLink = 'https://buy.stripe.com/fZucN57du4Se30o51Z7EQ02';
     const ownerBypassValue = 'onemedia';
 
     function grantOwnerBypass() {
@@ -236,7 +235,7 @@ html
     }
 
     payBtn.addEventListener('click', function() {
-      window.location.href = directStripeLink;
+      window.location.href = 'buy-now.html';
     });
 
     function closeDemo() {

@@ -80,6 +80,30 @@
       transform: translateY(-1px);
       opacity: 0.97;
     }
+    .currency-picker {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 16px;
+      text-align: left;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .currency-picker select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      background: white;
+      color: var(--text);
+      font: inherit;
+    }
+    .checkout-message {
+      min-height: 1.4em;
+      margin: 10px 0 0;
+      color: #a33b28;
+      font-size: 0.9rem;
+    }
     .secondary {
       display: inline-block;
       margin-top: 12px;
@@ -96,8 +120,44 @@
     <p>Unlock the full 7-day Yang Style journey with the complete set of guided exercises, videos, and daily structure.</p>
     <div class="price">€1.99 one-time</div>
     <p><strong>How it can change your lifestyle:</strong> A short daily Tai Chi practice can give you a calmer start, more mindful movement, and a simple routine you can return to throughout the week.</p>
-    <a class="buy-btn" href="https://buy.stripe.com/fZucN57du4Se30o51Z7EQ02" target="_blank" rel="noopener noreferrer">Buy Now</a>
+    <label class="currency-picker" for="currency">Choose currency
+      <select id="currency" name="currency">
+        <option value="eur">EUR (€1.99)</option>
+        <option value="usd">USD ($2.19)</option>
+        <option value="gbp">GBP (£1.69)</option>
+      </select>
+    </label>
+    <button class="buy-btn" id="buyBtn" type="button">Buy Now</button>
+    <p class="checkout-message" id="checkoutMessage" role="status"></p>
     <div style="margin-top: 16px;"><a class="secondary" href="index.html">Back to demo</a></div>
   </main>
+  <script>
+    const currency = document.getElementById('currency');
+    const buyBtn = document.getElementById('buyBtn');
+    const checkoutMessage = document.getElementById('checkoutMessage');
+
+    currency.addEventListener('change', () => {
+      const labels = { eur: '€1.99 one-time', usd: '$2.19 one-time', gbp: '£1.69 one-time' };
+      document.querySelector('.price').textContent = labels[currency.value];
+    });
+
+    buyBtn.addEventListener('click', async () => {
+      buyBtn.disabled = true;
+      checkoutMessage.textContent = '';
+      try {
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ currency: currency.value })
+        });
+        const result = await response.json();
+        if (!response.ok || !result.url) throw new Error(result.error || 'Unable to start checkout');
+        window.location.href = result.url;
+      } catch (error) {
+        checkoutMessage.textContent = error.message;
+        buyBtn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>

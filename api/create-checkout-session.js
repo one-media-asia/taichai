@@ -25,13 +25,22 @@ module.exports = async function handler(req, res) {
 
   const stripe = new Stripe(stripeSecretKey);
   const baseUrl = getBaseUrl(req);
+  const prices = { eur: 199, usd: 219, gbp: 169 };
+  const currency = String(req.body?.currency || 'eur').toLowerCase();
+  if (!Object.prototype.hasOwnProperty.call(prices, currency)) {
+    return res.status(400).json({ error: 'Unsupported currency' });
+  }
 
   try {
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       payment_method_types: ['card'],
       line_items: [{
-        price: 'price_1UBpKQHfLuEywLiXgwgLD2xS',
+        price_data: {
+          currency,
+          unit_amount: prices[currency],
+          product_data: { name: 'Tai Chi Week Planner' }
+        },
         quantity: 1
       }],
       success_url: `${baseUrl}/payment-success.html?session_id={CHECKOUT_SESSION_ID}`,
