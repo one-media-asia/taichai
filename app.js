@@ -733,6 +733,8 @@ let state = {
   selectedExercise: null,
   demoRunning: false,
   demoInterval: null,
+  demoTourTimer: null,
+  demoTourIndex: 0,
   currentStep: 0,
   stepDuration: 4000,
   completedDays: [],
@@ -1163,6 +1165,10 @@ function renderProgress() {
 function switchTab(tabName) {
   state.currentTab = tabName;
 
+  if (tabName !== "exercise") {
+    stopDemo();
+  }
+
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.tab === tabName);
   });
@@ -1180,6 +1186,42 @@ function switchTab(tabName) {
       renderDemoArea();
     }
   }
+}
+
+function stopAppDemoTour() {
+  if (state.demoTourTimer) {
+    clearInterval(state.demoTourTimer);
+    state.demoTourTimer = null;
+  }
+}
+
+function startAppDemoTour() {
+  const exerciseIds = Object.keys(EXERCISES);
+  const demoTabs = ["plan", "exercise", "progress", "settings"];
+
+  stopAppDemoTour();
+  stopDemo();
+
+  state.demoTourIndex = 0;
+
+  state.demoTourTimer = setInterval(() => {
+    const tab = demoTabs[state.demoTourIndex % demoTabs.length];
+    if (tab === "exercise") {
+      const exerciseId = exerciseIds[Math.floor(state.demoTourIndex / demoTabs.length) % exerciseIds.length];
+      state.selectedExercise = exerciseId;
+      state.currentStep = 0;
+      renderExerciseSelector();
+      renderDemoArea();
+      startDemo();
+    } else {
+      switchTab(tab);
+    }
+
+    state.demoTourIndex += 1;
+  }, 5000);
+
+  const initialTab = demoTabs[0];
+  switchTab(initialTab);
 }
 
 // ==================== REMINDERS ====================
@@ -1445,9 +1487,17 @@ function init() {
 
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
+      stopAppDemoTour();
       switchTab(btn.dataset.tab);
     });
   });
+
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("demo") === "1") {
+    setTimeout(() => {
+      startAppDemoTour();
+    }, 400);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", init);

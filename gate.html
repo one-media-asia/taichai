@@ -250,9 +250,10 @@ html
       demoClose.focus();
     });
     demoClose.addEventListener('click', closeDemo);
+    demoCta.textContent = 'Start App Tour';
     demoCta.addEventListener('click', function() {
       closeDemo();
-      payBtn.focus();
+      window.location.href = 'index.html?demo=1';
     });
     demoModal.addEventListener('click', function(event) {
       if (event.target === demoModal) closeDemo();
