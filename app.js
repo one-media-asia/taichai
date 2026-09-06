@@ -1211,6 +1211,17 @@ function startAppDemoTour() {
   const runTourStep = () => {
     const tab = demoTabs[tourStep % demoTabs.length];
 
+    if (tab === "settings" && tourStep > 0) {
+      if (document.getElementById("demo-buy-now")) {
+        const buyButton = document.getElementById("demo-buy-now");
+        buyButton.scrollIntoView({ behavior: "smooth", block: "center" });
+        buyButton.classList.add("demo-buy-now-highlight");
+        setTimeout(() => buyButton.classList.remove("demo-buy-now-highlight"), 1000);
+      }
+      stopAppDemoTour();
+      return;
+    }
+
     if (tab === "exercise") {
       const exerciseId = exerciseIds[Math.floor(tourStep / demoTabs.length) % exerciseIds.length];
       state.selectedExercise = exerciseId;
