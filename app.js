@@ -5,7 +5,10 @@
 // ==================== ACCESS GATE ====================
 // Personal owner bypass used for local testing or self-access without Stripe.
 const OWNER_BYPASS_KEY = 'onemedia';
+const DEMO_PREVIEW_KEY = 'demo';
 const ownerBypassParam = new URLSearchParams(window.location.search).get('bypass');
+const demoPreviewParam = new URLSearchParams(window.location.search).get('demo');
+const allowDemoPreview = ownerBypassParam === OWNER_BYPASS_KEY || demoPreviewParam === '1';
 
 function grantOwnerBypass() {
   document.cookie = 'taichi_access=granted; path=/; SameSite=Lax';
@@ -20,7 +23,7 @@ if (ownerBypassParam === OWNER_BYPASS_KEY) {
   try {
     const res = await fetch('/api/check-access', { credentials: 'same-origin' });
     const data = await res.json();
-    if (!data.authorized) {
+    if (!data.authorized && !allowDemoPreview) {
       if (ownerBypassParam === OWNER_BYPASS_KEY) {
         window.location.replace('index.html');
       } else {
@@ -37,7 +40,7 @@ if (ownerBypassParam === OWNER_BYPASS_KEY) {
       }, {});
       var _lsAccess = false;
       try { _lsAccess = localStorage.getItem('taiChi_access_granted') === '1'; } catch (err) { /* ignore */ }
-      if ((_lsAccess !== true && _cookies.taichi_access !== 'granted') && ownerBypassParam !== OWNER_BYPASS_KEY) {
+      if ((_lsAccess !== true && _cookies.taichi_access !== 'granted') && !allowDemoPreview) {
         window.location.replace('gate.html');
       }
     } catch (err) { /* ignore */ }
