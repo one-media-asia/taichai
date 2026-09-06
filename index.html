@@ -36,6 +36,7 @@
 
     <!-- TAB: Plan -->
     <section id="tab-plan" class="tab-content active">
+      <div id="goal-selector" class="goal-selector"></div>
       <div id="week-grid" class="week-grid"></div>
     </section>
 
@@ -72,6 +73,10 @@
           <span class="stat-num" id="stat-exercises">0</span>
           <span class="stat-label" data-i18n="exercisesDone">Exercises Done</span>
         </div>
+        <div class="stat-card">
+          <span class="stat-num" id="stat-minutes">0</span>
+          <span class="stat-label">Minutes Practiced</span>
+        </div>
       </div>
       <div id="progress-calendar" class="progress-calendar"></div>
       <button id="reset-progress" class="btn-danger" data-i18n="resetProgress">Reset All Progress</button>
@@ -106,6 +111,13 @@
           <input type="range" id="step-duration" min="2" max="10" value="4" />
           <span id="step-duration-val">4s</span>
         </label>
+      </div>
+      <div class="settings-group">
+        <h3>♿ Accessibility</h3>
+        <label class="setting-row"><span>Larger text</span><input type="checkbox" id="large-text-toggle" /></label>
+        <label class="setting-row"><span>High contrast</span><input type="checkbox" id="contrast-toggle" /></label>
+        <label class="setting-row"><span>Chair-friendly guidance</span><input type="checkbox" id="chair-mode-toggle" /></label>
+        <label class="setting-row"><span>Voice instructions</span><input type="checkbox" id="voice-toggle" /></label>
       </div>
       <div class="settings-group">
         <h3 data-i18n="legal">📜 Legal</h3>
