@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy Tai Chi Week</title>
+  <style>
+    :root {
+      --bg: #f5f0e8;
+      --card-bg: #ffffff;
+      --primary: #2d5016;
+      --primary-light: #4a7c28;
+      --accent: #c4a35a;
+      --text: #2c2c2c;
+      --text-light: #666;
+      --border: #d9d0c0;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: linear-gradient(180deg, #f6f1e8, #efeadb);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+    }
+    .checkout-card {
+      width: min(440px, 100%);
+      background: var(--card-bg);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      color: var(--primary);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+    }
+    p {
+      margin: 0 0 18px;
+      line-height: 1.6;
+      color: var(--text-light);
+    }
+    .price {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f1f6ec;
+      border: 1px solid var(--border);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1.3rem;
+      border-radius: 999px;
+      padding: 10px 18px;
+      margin-bottom: 18px;
+    }
+    .buy-btn {
+      display: inline-block;
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .buy-btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.97;
+    }
+    .secondary {
+      display: inline-block;
+      margin-top: 12px;
+      color: var(--primary-light);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <main class="checkout-card">
+    <div class="icon">☯</div>
+    <h1>Buy Tai Chi Week</h1>
+    <p>Unlock the full 7-day Yang Style journey with the complete set of guided exercises, videos, and daily structure.</p>
+    <div class="price">€1.99 one-time</div>
+    <p><strong>How it can change your lifestyle:</strong> A short daily Tai Chi practice can give you a calmer start, more mindful movement, and a simple routine you can return to throughout the week.</p>
+    <a class="buy-btn" href="https://buy.stripe.com/fZucN57du4Se30o51Z7EQ02" target="_blank" rel="noopener noreferrer">Buy Now</a>
+    <div style="margin-top: 16px;"><a class="secondary" href="index.html">Back to demo</a></div>
+  </main>
+</body>
+</html>

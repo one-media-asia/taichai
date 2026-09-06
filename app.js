@@ -1222,16 +1222,8 @@ function startAppDemoTour() {
       switchTab("progress");
     },
     () => {
-      state.selectedExercise = null;
-      stopDemo();
-      switchTab("settings");
-      const buyButton = document.getElementById("demo-buy-now");
-      if (buyButton) {
-        buyButton.scrollIntoView({ behavior: "smooth", block: "center" });
-        buyButton.classList.add("demo-buy-now-highlight");
-        setTimeout(() => buyButton.classList.remove("demo-buy-now-highlight"), 1200);
-      }
       stopAppDemoTour();
+      window.location.href = "buy-now.html";
     }
   ];
 
@@ -1527,7 +1519,7 @@ function init() {
   const buyNowBtn = document.getElementById("demo-buy-now");
   if (buyNowBtn) {
     buyNowBtn.addEventListener("click", () => {
-      window.open("https://buy.stripe.com/fZucN57du4Se30o51Z7EQ02", "_blank", "noopener,noreferrer");
+      window.location.href = "buy-now.html";
     });
   }
 
