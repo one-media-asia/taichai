@@ -869,6 +869,13 @@ function initOnboarding() {
   const app = document.getElementById("app");
   const form = document.getElementById("onboarding-form");
   if (!onboarding || !app || !form) return;
+
+  if (allowDemoPreview) {
+    onboarding.hidden = true;
+    app.hidden = false;
+    document.body.classList.add("demo-mode");
+    return;
+  }
   onboarding.hidden = state.onboardingComplete;
   app.hidden = !state.onboardingComplete;
   if (state.onboardingComplete) return;
@@ -1741,6 +1748,7 @@ function init() {
   initReset();
 
   document.querySelectorAll(".tab-btn").forEach((btn) => {
+    if (allowDemoPreview) return;
     btn.addEventListener("click", () => {
       stopAppDemoTour();
       switchTab(btn.dataset.tab);
@@ -1752,6 +1760,7 @@ function init() {
     buyNowBtn.addEventListener("click", () => {
       window.location.href = "buy-now.html";
     });
+
   }
 
   const urlParams = new URLSearchParams(window.location.search);

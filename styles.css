@@ -21,6 +21,23 @@ body.large-text { font-size: 112%; }
 body.high-contrast { --bg: #ffffff; --card-bg: #ffffff; --text: #111111; --text-light: #333333; --border: #555555; }
 body.chair-mode .exercise-video-heading::after { content: " · Chair-friendly option"; color: var(--primary-light); }
 body.voice-guidance .step-display { border-left: 4px solid var(--accent); }
+body.demo-mode .tab-nav,
+body.demo-mode .goal-options,
+body.demo-mode .exercise-selector,
+body.demo-mode .demo-controls,
+body.demo-mode .step-list,
+body.demo-mode .exercise-reference-thumbs,
+body.demo-mode .day-card,
+body.demo-mode .workout-intro button,
+body.demo-mode #listen-step,
+body.demo-mode .settings-group input,
+body.demo-mode #reset-progress,
+body.demo-mode #install-btn {
+  pointer-events: none;
+  opacity: 0.72;
+}
+
+body.demo-mode .tab-nav { opacity: 0.5; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
