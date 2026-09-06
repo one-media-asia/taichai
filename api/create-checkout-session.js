@@ -1,5 +1,18 @@
 const Stripe = require('stripe');
 
+function getBaseUrl(req) {
+  const directBaseUrl = process.env.BASE_URL || process.env.APP_URL || process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL;
+  if (directBaseUrl) {
+    return directBaseUrl.startsWith('http://') || directBaseUrl.startsWith('https://')
+      ? directBaseUrl.replace(/\/$/, '')
+      : `https://${directBaseUrl.replace(/\/$/, '')}`;
+  }
+
+  const forwardedProto = req.headers['x-forwarded-proto'] || 'https';
+  const host = req.headers.host || 'localhost:3000';
+  return `${forwardedProto}://${host}`;
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -11,7 +24,7 @@ module.exports = async function handler(req, res) {
   }
 
   const stripe = new Stripe(stripeSecretKey);
-  const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+  const baseUrl = getBaseUrl(req);
 
   try {
     const session = await stripe.checkout.sessions.create({
