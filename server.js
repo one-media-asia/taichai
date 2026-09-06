@@ -14,9 +14,24 @@ const stripe = stripeSecretKey ? new Stripe(stripeSecretKey) : null;
 
 const paidCustomers = new Set();
 const paidSessions = new Set();
+const countryCurrencies = {
+  AT: 'eur', BE: 'eur', CY: 'eur', DE: 'eur', EE: 'eur', ES: 'eur', FI: 'eur', FR: 'eur',
+  GR: 'eur', IE: 'eur', IT: 'eur', LT: 'eur', LU: 'eur', LV: 'eur', MT: 'eur', NL: 'eur', PT: 'eur',
+  SI: 'eur', SK: 'eur', HR: 'eur', GB: 'gbp', UK: 'gbp', US: 'usd'
+};
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.get('/api/currency', (req, res) => {
+  const country = String(
+    req.headers['x-vercel-ip-country'] ||
+    req.headers['cf-ipcountry'] ||
+    req.headers['cloudfront-viewer-country'] ||
+    ''
+  ).toUpperCase();
+  res.json({ currency: countryCurrencies[country] || 'eur' });
+});
 
 function getSessionKey(req) {
   return req.cookies && req.cookies.taichi_session ? req.cookies.taichi_session : 'anonymous';

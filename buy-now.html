@@ -135,11 +135,35 @@
     const currency = document.getElementById('currency');
     const buyBtn = document.getElementById('buyBtn');
     const checkoutMessage = document.getElementById('checkoutMessage');
+    const labels = { eur: '€1.99 one-time', usd: '$2.19 one-time', gbp: '£1.69 one-time' };
+
+    function updatePrice() {
+      document.querySelector('.price').textContent = labels[currency.value];
+    }
 
     currency.addEventListener('change', () => {
-      const labels = { eur: '€1.99 one-time', usd: '$2.19 one-time', gbp: '£1.69 one-time' };
-      document.querySelector('.price').textContent = labels[currency.value];
+      localStorage.setItem('taiChi_currency', currency.value);
+      updatePrice();
     });
+
+    (async () => {
+      const savedCurrency = localStorage.getItem('taiChi_currency');
+      if (savedCurrency && labels[savedCurrency]) {
+        currency.value = savedCurrency;
+        updatePrice();
+        return;
+      }
+      try {
+        const response = await fetch('/api/currency');
+        const result = await response.json();
+        if (response.ok && labels[result.currency]) {
+          currency.value = result.currency;
+          updatePrice();
+        }
+      } catch (error) {
+        // EUR remains the default when location detection is unavailable.
+      }
+    })();
 
     buyBtn.addEventListener('click', async () => {
       buyBtn.disabled = true;
