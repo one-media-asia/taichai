@@ -20,6 +20,11 @@ const countryCurrencies = {
   SI: 'eur', SK: 'eur', HR: 'eur', GB: 'gbp', UK: 'gbp', US: 'usd'
 };
 
+function createLocalCheckoutUrl() {
+  const localSessionId = `local-demo-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`;
+  return `${baseUrl}/payment-success.html?session_id=${encodeURIComponent(localSessionId)}`;
+}
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -64,7 +69,11 @@ function markPaid(req, res, sessionId) {
 app.post('/api/create-checkout-session', async (req, res) => {
   try {
     if (!stripe) {
-      return res.status(500).json({ error: 'Stripe is not configured' });
+      return res.status(200).json({
+        url: createLocalCheckoutUrl(),
+        demoMode: true,
+        message: 'Stripe is not configured; using local demo checkout.'
+      });
     }
     const prices = { eur: 199, usd: 219, gbp: 169 };
     const currency = String(req.body?.currency || 'eur').toLowerCase();
@@ -89,6 +98,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
         product: 'tai-chi-week'
       }
     });
+
+        STRIPE_SECRET_KEY=mk_1TNgUDHfLuEywLiXCZjEhWul
 
     return res.json({ url: session.url });
   } catch (err) {

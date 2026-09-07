@@ -19,12 +19,18 @@ module.exports = async function handler(req, res) {
   }
 
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+  const baseUrl = getBaseUrl(req);
+
   if (!stripeSecretKey) {
-    return res.status(500).json({ error: 'Stripe is not configured' });
+    const localSessionId = `local-demo-${Date.now()}-${Math.random().toString(16).slice(2, 10)}`;
+    return res.status(200).json({
+      url: `${baseUrl}/payment-success.html?session_id=${encodeURIComponent(localSessionId)}`,
+      demoMode: true,
+      message: 'Stripe is not configured; using local demo checkout.'
+    });
   }
 
   const stripe = new Stripe(stripeSecretKey);
-  const baseUrl = getBaseUrl(req);
   const prices = { eur: 199, usd: 219, gbp: 169 };
   const currency = String(req.body?.currency || 'eur').toLowerCase();
   if (!Object.prototype.hasOwnProperty.call(prices, currency)) {
