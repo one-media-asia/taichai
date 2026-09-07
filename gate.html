@@ -74,20 +74,6 @@ html
     }
     .pay-btn:hover { background: #5147e5; transform: translateY(-1px); }
     .pay-btn:active { transform: scale(0.98); }
-    .trial-btn {
-      display: inline-block;
-      margin-top: 12px;
-      background: var(--primary);
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 12px;
-      border: none;
-      width: 100%;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .trial-btn:hover { background: var(--primary-light); }
     .demo-btn {
       display: inline-block;
       margin-top: 12px;
@@ -251,7 +237,6 @@ html
     <h1 class="gate-title">Tai Chi Week</h1>
     <p class="gate-subtitle">One-time payment unlocks the full 7-day Yang Style journey — lifetime access.</p>
     <button class="pay-btn" id="payBtn" type="button">Pay Now to Access</button>
-    <button class="trial-btn" id="trialBtn" type="button">Start 7-Day Free Trial</button>
     <button class="demo-btn" id="demoBtn" type="button">View Demo First</button>
     <p class="gate-note">Secure payment via Stripe. You'll be redirected back after payment.<br>Already paid? <a href="#" onclick="grantAccessAndGo(); return false;">Click here if you've paid</a></p>
   </div>
@@ -290,29 +275,11 @@ html
 
   <script>
     const payBtn = document.getElementById('payBtn');
-    const trialBtn = document.getElementById('trialBtn');
     const demoBtn = document.getElementById('demoBtn');
     const demoModal = document.getElementById('demoModal');
     const demoClose = document.getElementById('demoClose');
     const demoCta = document.getElementById('demoCta');
     const ownerBypassValue = 'onemedia';
-    const trialStorageKey = 'taiChi_trial_ends_at';
-    const trialDurationMs = 7 * 24 * 60 * 60 * 1000;
-
-    function getTrialEnd() {
-      try {
-        var trialEnd = Number(localStorage.getItem(trialStorageKey));
-        return Number.isFinite(trialEnd) && trialEnd > Date.now() ? trialEnd : 0;
-      } catch (e) {
-        return 0;
-      }
-    }
-
-    function startTrial() {
-      var trialEnd = getTrialEnd() || Date.now() + trialDurationMs;
-      try { localStorage.setItem(trialStorageKey, String(trialEnd)); } catch (e) { /* ignore */ }
-      window.location.href = 'index.html';
-    }
 
     function grantOwnerBypass() {
       document.cookie = 'taichi_access=granted; path=/; SameSite=Lax';
@@ -328,7 +295,6 @@ html
     payBtn.addEventListener('click', function() {
       window.location.href = 'buy-now.html';
     });
-    trialBtn.addEventListener('click', startTrial);
 
     function closeDemo() {
       demoModal.hidden = true;
@@ -354,11 +320,6 @@ html
     });
 
     async function grantAccessAndGo() {
-      if (getTrialEnd()) {
-        window.location.href = 'index.html';
-        return;
-      }
-
       try {
         const res = await fetch('/api/check-access', { credentials: 'same-origin' });
         const data = await res.json();
