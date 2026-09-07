@@ -165,18 +165,19 @@
     var countdown = 5;
     var countdownEl = document.getElementById('countdown');
     var enterBtn = document.getElementById('enterBtn');
+    var appUrl = 'https://tai-chi-week-planner-git-main-onemediaasia.vercel.app/index.html';
 
     function updateCountdown() {
       countdown--;
       if (countdown <= 0) {
-        window.location.href = 'index.html';
+        window.location.href = appUrl;
       } else {
         countdownEl.textContent = 'Redirecting in ' + countdown + 's...';
       }
     }
 
     enterBtn.addEventListener('click', function() {
-      window.location.href = 'index.html';
+      window.location.href = appUrl;
     });
 
     var installBtn = document.getElementById('installPwaBtn');
@@ -201,7 +202,7 @@
           // Ignore.
         }
 
-        window.location.href = 'index.html';
+        window.location.href = appUrl;
       });
     }
 
