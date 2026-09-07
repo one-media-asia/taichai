@@ -120,50 +120,13 @@
     <p>Unlock the full 7-day Yang Style journey with the complete set of guided exercises, videos, and daily structure.</p>
     <div class="price">€1.99 one-time</div>
     <p><strong>How it can change your lifestyle:</strong> A short daily Tai Chi practice can give you a calmer start, more mindful movement, and a simple routine you can return to throughout the week.</p>
-    <label class="currency-picker" for="currency">Choose currency
-      <select id="currency" name="currency">
-        <option value="eur">EUR (€1.99)</option>
-        <option value="usd">USD ($2.19)</option>
-        <option value="gbp">GBP (£1.69)</option>
-      </select>
-    </label>
     <button class="buy-btn" id="buyBtn" type="button">Buy Now</button>
     <p class="checkout-message" id="checkoutMessage" role="status"></p>
     <div style="margin-top: 16px;"><a class="secondary" href="index.html">Back to demo</a></div>
   </main>
   <script>
-    const currency = document.getElementById('currency');
     const buyBtn = document.getElementById('buyBtn');
     const checkoutMessage = document.getElementById('checkoutMessage');
-    const labels = { eur: '€1.99 one-time', usd: '$2.19 one-time', gbp: '£1.69 one-time' };
-
-    function updatePrice() {
-      document.querySelector('.price').textContent = labels[currency.value];
-    }
-
-    currency.addEventListener('change', () => {
-      localStorage.setItem('taiChi_currency', currency.value);
-      updatePrice();
-    });
-
-    (async () => {
-      const savedCurrency = localStorage.getItem('taiChi_currency');
-      if (savedCurrency && labels[savedCurrency]) {
-        currency.value = savedCurrency;
-        updatePrice();
-        return;
-      }
-      try {
-        const response = await fetch('/api/currency');
-        const result = await response.json();
-        if (response.ok && labels[result.currency]) {
-          currency.value = result.currency;
-          updatePrice();
-        }
-      } catch (error) {
-        // EUR remains the default when location detection is unavailable.
-      }
-    })();
 
     buyBtn.addEventListener('click', async () => {
       buyBtn.disabled = true;
@@ -172,7 +135,7 @@
         const response = await fetch('/api/create-checkout-session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ currency: currency.value })
+          body: JSON.stringify({ currency: 'eur' })
         });
         const result = await response.json();
         if (!response.ok || !result.url) throw new Error(result.error || 'Unable to start checkout');

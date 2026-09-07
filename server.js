@@ -75,19 +75,14 @@ app.post('/api/create-checkout-session', async (req, res) => {
         message: 'Stripe is not configured; using local demo checkout.'
       });
     }
-    const prices = { eur: 199, usd: 219, gbp: 169 };
-    const currency = String(req.body?.currency || 'eur').toLowerCase();
-    if (!Object.prototype.hasOwnProperty.call(prices, currency)) {
-      return res.status(400).json({ error: 'Unsupported currency' });
-    }
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       payment_method_types: ['card'],
       line_items: [{
         price_data: {
-          currency,
-          unit_amount: prices[currency],
+          currency: 'eur',
+          unit_amount: 199,
           product_data: { name: 'Tai Chi Week Planner' }
         },
         quantity: 1
@@ -98,8 +93,6 @@ app.post('/api/create-checkout-session', async (req, res) => {
         product: 'tai-chi-week'
       }
     });
-
-        STRIPE_SECRET_KEY=mk_1TNgUDHfLuEywLiXCZjEhWul
 
     return res.json({ url: session.url });
   } catch (err) {
