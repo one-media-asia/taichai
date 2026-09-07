@@ -127,23 +127,12 @@
   <script>
     const buyBtn = document.getElementById('buyBtn');
     const checkoutMessage = document.getElementById('checkoutMessage');
+    const stripePaymentLink = 'https://buy.stripe.com/bJe3cv7dugAWdF2bqn7EQ04';
 
-    buyBtn.addEventListener('click', async () => {
+    buyBtn.addEventListener('click', () => {
       buyBtn.disabled = true;
       checkoutMessage.textContent = '';
-      try {
-        const response = await fetch('/api/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ currency: 'eur' })
-        });
-        const result = await response.json();
-        if (!response.ok || !result.url) throw new Error(result.error || 'Unable to start checkout');
-        window.location.href = result.url;
-      } catch (error) {
-        checkoutMessage.textContent = error.message;
-        buyBtn.disabled = false;
-      }
+      window.location.href = stripePaymentLink;
     });
   </script>
 </body>
