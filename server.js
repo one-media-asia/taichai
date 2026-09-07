@@ -134,7 +134,7 @@ app.get('/api/check-access', (req, res) => {
 app.get('/health', (req, res) => {
   res.json({ ok: true, stripeConfigured: !!stripe });
 });
-//
+
 app.use(express.static(path.join(__dirname)));
 
 app.get('*', (req, res, next) => {
