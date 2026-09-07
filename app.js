@@ -651,6 +651,106 @@ const I18N = {
     installBannerInstall: "安装",
     installBannerDismiss: "暂不",
     installBannerIosHint: "点击分享，然后选择“添加到主屏幕”"
+  },
+  id: {
+    title: "☯ Tai Chi Mingguan",
+    subtitle: "Gaya Yang · Perjalanan 7 Hari",
+    documentTitle: "Perencana Tai Chi Mingguan",
+    tabPlan: "📅 Rencana",
+    tabDemo: "🏋️ Latihan",
+    tabProgress: "📊 Kemajuan",
+    tabSettings: "⚙️ Pengaturan",
+    placeholder: "Pilih latihan di atas untuk memulai demonstrasi.",
+    daysCompleted: "Hari Selesai",
+    dayStreak: "Rangkaian Hari",
+    exercisesDone: "Latihan Selesai",
+    resetProgress: "Atur Ulang Semua Kemajuan",
+    confirmReset: "Anda yakin ingin mengatur ulang semua kemajuan? Tindakan ini tidak dapat dibatalkan.",
+    dailyReminder: "⏰ Pengingat Harian",
+    enableReminder: "Aktifkan pengingat",
+    reminderTime: "Waktu pengingat",
+    saveReminder: "Simpan Pengingat",
+    preference: "🎯 Preferensi",
+    secondsPerStep: "Detik per langkah",
+    installApp: "📲 Instal Aplikasi",
+    installHint: "Tambahkan ke layar utama untuk pengalaman aplikasi lengkap.",
+    installPwa: "Instal PWA",
+    legal: "📜 Informasi Hukum",
+    privacyPolicy: "Kebijakan Privasi",
+    language: "🌐 Bahasa",
+    startTodaysPractice: "Mulai Latihan Hari Ini",
+    todaysFocus: "Fokus hari ini",
+    pressStart: "Tekan Mulai untuk memulai",
+    stepOf: "Langkah {x} dari {y}",
+    prev: "⏮ Sebelumnya",
+    start: "▶ Mulai",
+    next: "Berikutnya ⏭",
+    pause: "⏸ Jeda",
+    resume: "▶ Lanjutkan",
+    last28Days: "28 Hari Terakhir",
+    dayAbbr: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
+    reminderSet: "Pengingat harian diatur pada {time}",
+    notificationDenied: "Izin notifikasi ditolak",
+    reminderSaved: "Pengingat disimpan",
+    notifTitle: "☯ Waktu Tai Chi",
+    notifBody: "Waktunya latihan Tai Chi harian!",
+    weekdays: { Monday: "Senin", Tuesday: "Selasa", Wednesday: "Rabu", Thursday: "Kamis", Friday: "Jumat", Saturday: "Sabtu", Sunday: "Minggu" },
+    weekFocus: { Monday: "Dasar & Pernapasan", Tuesday: "Keseimbangan & Kekuatan Kaki", Wednesday: "Aliran & Koordinasi", Thursday: "Inti & Stabilitas", Friday: "Kelenturan & Peregangan", Saturday: "Latihan Bentuk Lengkap", Sunday: "Istirahat & Aliran Lembut" },
+    exercises: {},
+    installBannerTitle: "Instal Tai Chi Mingguan sebagai aplikasi",
+    installBannerInstall: "Instal",
+    installBannerDismiss: "Nanti saja",
+    installBannerIosHint: "Ketuk Bagikan, lalu Tambahkan ke Layar Utama"
+  },
+  nl: {
+    title: "☯ Tai Chi Week",
+    subtitle: "Yang-stijl · 7-daagse reis",
+    documentTitle: "Tai Chi Weekplanner",
+    tabPlan: "📅 Plan",
+    tabDemo: "🏋️ Training",
+    tabProgress: "📊 Voortgang",
+    tabSettings: "⚙️ Instellingen",
+    placeholder: "Selecteer hierboven een oefening om de demonstratie te starten.",
+    daysCompleted: "Dagen voltooid",
+    dayStreak: "Reeks dagen",
+    exercisesDone: "Oefeningen voltooid",
+    resetProgress: "Alle voortgang wissen",
+    confirmReset: "Weet je zeker dat je alle voortgang wilt wissen? Dit kan niet ongedaan worden gemaakt.",
+    dailyReminder: "⏰ Dagelijkse herinnering",
+    enableReminder: "Herinnering inschakelen",
+    reminderTime: "Tijd van herinnering",
+    saveReminder: "Herinnering opslaan",
+    preference: "🎯 Voorkeur",
+    secondsPerStep: "Seconden per stap",
+    installApp: "📲 App installeren",
+    installHint: "Voeg de app toe aan je startscherm voor de volledige ervaring.",
+    installPwa: "PWA installeren",
+    legal: "📜 Juridisch",
+    privacyPolicy: "Privacybeleid",
+    language: "🌐 Taal",
+    startTodaysPractice: "Begin met de training van vandaag",
+    todaysFocus: "Focus van vandaag",
+    pressStart: "Druk op Start om te beginnen",
+    stepOf: "Stap {x} van {y}",
+    prev: "⏮ Vorige",
+    start: "▶ Start",
+    next: "Volgende ⏭",
+    pause: "⏸ Pauze",
+    resume: "▶ Hervatten",
+    last28Days: "Laatste 28 dagen",
+    dayAbbr: ["Zo", "Ma", "Di", "Wo", "Do", "Vr", "Za"],
+    reminderSet: "Dagelijkse herinnering ingesteld op {time}",
+    notificationDenied: "Toestemming voor meldingen geweigerd",
+    reminderSaved: "Herinnering opgeslagen",
+    notifTitle: "☯ Tai Chi-tijd",
+    notifBody: "Tijd voor je dagelijkse Tai Chi-training!",
+    weekdays: { Monday: "Maandag", Tuesday: "Dinsdag", Wednesday: "Woensdag", Thursday: "Donderdag", Friday: "Vrijdag", Saturday: "Zaterdag", Sunday: "Zondag" },
+    weekFocus: { Monday: "Basis & Ademhaling", Tuesday: "Balans & Been kracht", Wednesday: "Flow & Coordinatie", Thursday: "Kern & Stabiliteit", Friday: "Flexibiliteit & Rekken", Saturday: "Volledige vormtraining", Sunday: "Rust & Zachte flow" },
+    exercises: {},
+    installBannerTitle: "Installeer Tai Chi Week als app",
+    installBannerInstall: "Installeren",
+    installBannerDismiss: "Niet nu",
+    installBannerIosHint: "Tik op Deel en kies Zet op beginscherm"
   }
 };
 
@@ -668,10 +768,13 @@ let currentLocale = "en";
 function detectLocale() {
   try {
     const saved = localStorage.getItem("taiChiLang");
-    if (saved === "en" || saved === "zh-CN") return saved;
+    if (saved === "en" || saved === "zh-CN" || saved === "id" || saved === "nl") return saved;
   } catch (e) { /* ignore */ }
   const nav = (navigator.language || navigator.userLanguage || "en").toLowerCase();
-  return nav.startsWith("zh") ? "zh-CN" : "en";
+  if (nav.startsWith("zh")) return "zh-CN";
+  if (nav.startsWith("id")) return "id";
+  if (nav.startsWith("nl")) return "nl";
+  return "en";
 }
 
 function getLocale() {
@@ -679,12 +782,12 @@ function getLocale() {
 }
 
 function setLocale(lang) {
-  if (lang !== "en" && lang !== "zh-CN") lang = "en";
+  if (!["en", "zh-CN", "id", "nl"].includes(lang)) lang = "en";
   currentLocale = lang;
   try {
     localStorage.setItem("taiChiLang", lang);
   } catch (e) { /* ignore */ }
-  document.documentElement.lang = lang === "zh-CN" ? "zh-CN" : "en";
+  document.documentElement.lang = lang;
   applyStaticI18n();
   updateLangToggleUI();
   updateInstallBannerText();
