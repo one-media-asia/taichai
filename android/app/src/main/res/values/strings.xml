@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Tai Chi Week</string>
+    <string name="title_activity_main">Tai Chi Week</string>
+    <string name="package_name">com.onemediaasia.taichi</string>
+    <string name="custom_url_scheme">com.onemediaasia.taichi</string>
+</resources>
